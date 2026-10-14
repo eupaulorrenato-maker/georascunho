@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 05: Arena White Hat (Game Show) | Search One GEO Engine™</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            searchone: {
+              cyan: '#00a5ff',
+              cyanHover: '#008fe0',
+              cyanLight: '#eef8ff',
+              whatsapp: '#25d366',
+              whatsappHover: '#20ba59'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #ffffff; color: #0f172a; font-family: 'Plus Jakarta Sans', sans-serif; }
+    .cyan-glow { box-shadow: 0 4px 14px 0 rgba(0, 165, 255, 0.35); }
+    .gold-glow { box-shadow: 0 4px 18px 0 rgba(245, 158, 11, 0.4); }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen bg-white text-slate-900 pb-16">
+
+  <!-- TOP NAVBAR (ALWAYS STICKY) -->
+  <header class="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2">
+        <div class="flex items-baseline">
+          <span class="text-2xl font-black tracking-tighter text-black font-sans leading-none">SEARCH</span>
+          <span class="text-2xl font-black tracking-tighter text-searchone-cyan font-sans leading-none ml-1">ONE</span>
+        </div>
+        <div class="flex items-center gap-1.5 ml-1 pl-2 border-l border-slate-300">
+          <span class="text-[10px] font-black tracking-[0.2em] text-slate-700 uppercase font-sans">DIGITAL</span>
+          <span class="text-[9px] font-mono text-searchone-cyan font-bold bg-searchone-cyanLight px-1.5 py-0.5 rounded border border-searchone-cyan/30">GEO OS</span>
+        </div>
+      </a>
+
+      <nav class="hidden xl:flex items-center gap-6 text-[13px] font-semibold text-slate-700">
+        <a href="index.html" class="hover:text-searchone-cyan transition">Início</a>
+        <a href="o-que-e-geo.html" class="hover:text-searchone-cyan transition">O que é GEO</a>
+        <a href="auditor.html" class="hover:text-searchone-cyan transition">Auditor</a>
+        <a href="simulador-ia.html" class="hover:text-searchone-cyan transition">Simulador IA</a>
+        <a href="fatos-atomicos.html" class="hover:text-searchone-cyan transition">Fatos Atômicos</a>
+        <a href="arena-white-hat.html" class="text-searchone-cyan font-bold border-b-2 border-searchone-cyan pb-1">Arena Game</a>
+        <a href="diagnostico-marca.html" class="hover:text-searchone-cyan transition">Diagnóstico Domínio</a>
+        <a href="roteiro-30-dias.html" class="hover:text-searchone-cyan transition">Roteiro 30D</a>
+        <a href="base-tecnica.html" class="hover:text-searchone-cyan transition">Base Técnica</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="diagnostico-marca.html" class="hidden sm:inline-flex bg-searchone-cyan hover:bg-searchone-cyanHover text-white font-bold text-xs sm:text-sm px-5 py-2.5 rounded-full transition cyan-glow">
+          Próximo: Diagnóstico →
+        </a>
+        <button onclick="toggleMobileMenu()" class="xl:hidden p-2.5 text-slate-800 bg-slate-100 hover:bg-slate-200 transition rounded-xl flex items-center gap-1.5 font-bold text-xs" aria-label="Abrir Menu">
+          <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <span class="hidden sm:inline">Menu</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- MOBILE NAVIGATION DRAWER -->
+    <div id="mobile-menu" class="hidden xl:hidden bg-white border-t border-slate-200 px-4 py-4 space-y-1.5 shadow-xl text-sm font-semibold max-h-[80vh] overflow-y-auto">
+      <div class="text-[10px] font-mono font-bold text-slate-400 uppercase px-3 pb-1">Selecione o Módulo:</div>
+      <a href="index.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">🏠 Início / Dashboard</a>
+      <a href="o-que-e-geo.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">📖 Módulo 01: O que é GEO</a>
+      <a href="auditor.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">🔍 Módulo 02: Auditor de Conteúdo</a>
+      <a href="simulador-ia.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">🤖 Módulo 03: Simulador de IA (RAG)</a>
+      <a href="fatos-atomicos.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">⚙️ Módulo 04: Fatos Atômicos (GEOFlow)</a>
+      <a href="arena-white-hat.html" class="block py-2.5 px-3 rounded-lg bg-searchone-cyanLight text-searchone-cyan font-bold">🎮 Módulo 05: Arena White Hat Game</a>
+      <a href="diagnostico-marca.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">🎯 Módulo 06: Diagnóstico de Domínio & PR</a>
+      <a href="roteiro-30-dias.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">📅 Módulo 07: Roteiro 30 Dias & Checklist</a>
+      <a href="base-tecnica.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">📚 Módulo 08: Base Técnica Completa</a>
+    </div>
+  </header>
+
+  <!-- BREADCRUMBS -->
+  <div class="bg-slate-50 border-b border-slate-200 py-3">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-xs text-slate-500 flex items-center gap-2">
+      <a href="index.html" class="hover:text-searchone-cyan font-medium">Início</a>
+      <span>/</span>
+      <span class="text-black font-bold">Módulo 05: Arena Gamificada de Decisão & Limites White Hat</span>
+    </div>
+  </div>
+
+  <!-- MAIN WORKSPACE -->
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
+
+    <!-- TITLE & OVERVIEW -->
+    <div class="space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-700 text-xs font-bold uppercase tracking-wider">
+        MÓDULO 05 · GAME SHOW INTERATIVO ESTILO "SHOW DO MILHÃO"
+      </div>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-black tracking-tight leading-tight">
+        Arena White Hat: O Desafio dos Algoritmos de IA
+      </h1>
+      <p class="text-slate-600 text-base md:text-lg leading-relaxed">
+        Você está no comando de uma operação de marketing e SEO. Enfrente dilemas reais de clientes corporativos e tome as decisões certas. Se bater a dúvida, <strong>peça uma dica aos especialistas da Search One Digital</strong>!
+      </p>
+    </div>
+
+    <!-- 3-PILLAR CONTEXT BOX -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 p-6 rounded-2xl bg-slate-50 border border-slate-200 text-xs sm:text-sm">
+      <div class="space-y-1">
+        <strong class="text-black font-extrabold block">O que é este módulo?</strong>
+        <p class="text-slate-600 leading-relaxed">
+          Um simulador gamificado que ensina os mecanismos de governança das IAs através de perguntas e respostas práticas com feedback imediato.
+        </p>
+      </div>
+      <div class="space-y-1">
+        <strong class="text-black font-extrabold block">Para que serve na prática?</strong>
+        <p class="text-slate-600 leading-relaxed">
+          Para treinar sua equipe a nunca queimar a reputação do domínio com práticas Black Hat (modelos em massa, promessas falsas ou PBNs).
+        </p>
+      </div>
+      <div class="space-y-1">
+        <strong class="text-black font-extrabold block">O que você ganha com isso?</strong>
+        <p class="text-slate-600 leading-relaxed">
+          Certificado mental White Hat: saber exatamente o que os modelos premiam e acumular autoridade perene e auditável.
+        </p>
+      </div>
+    </div>
+
+    <!-- GAME CARD (SHOW DO MILHÃO STYLE) -->
+    <div class="p-6 sm:p-8 rounded-2xl bg-slate-50 border-2 border-slate-200 space-y-6 shadow-sm relative">
+      
+      <!-- HEADER DO JOGO -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
+        <div>
+          <span id="quiz-progress" class="font-mono text-searchone-cyan font-extrabold text-xs uppercase tracking-wider">Pergunta 1 de 6</span>
+          <div class="text-xs text-slate-500 font-medium">Fase de Governança e Risco Algorítmico</div>
+        </div>
+        
+        <div class="flex items-center gap-3">
+          <!-- BOTAO PEDIR DICA ESTILO SHOW DO MILHAO -->
+          <button onclick="requestExpertHint()" id="btn-hint" class="bg-amber-500 hover:bg-amber-600 text-white font-extrabold text-xs px-4 py-2 rounded-full transition gold-glow flex items-center gap-1.5 shadow-sm">
+            <span>💡 Pedir Dica à Carol Peres</span>
+            <span id="hints-badge" class="bg-amber-700/60 px-1.5 py-0.2 rounded-full text-[10px]">3 restantes</span>
+          </button>
+
+          <div class="flex items-center gap-2 bg-slate-900 px-4 py-2 rounded-xl text-white">
+            <span class="text-xs text-slate-400">Pontos:</span>
+            <span id="game-score" class="font-mono text-base font-bold text-searchone-cyan">100 pts</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CENÁRIO / PERGUNTA -->
+      <div class="space-y-2">
+        <h3 id="quiz-scenario-title" class="text-lg sm:text-xl font-black text-black"></h3>
+        <p id="quiz-scenario-desc" class="text-xs sm:text-sm text-slate-600 leading-relaxed"></p>
+      </div>
+
+      <!-- OPÇÕES DE RESPOSTA -->
+      <div id="quiz-options-container" class="space-y-3"></div>
+
+      <!-- FEEDBACK APÓS RESPONDER -->
+      <div id="quiz-feedback-box" class="hidden p-4 rounded-xl text-xs sm:text-sm space-y-1"></div>
+
+      <!-- CONTROLES INFERIORES -->
+      <div class="flex justify-between items-center pt-2">
+        <button onclick="resetGame()" class="text-xs text-slate-500 hover:text-black font-semibold transition">Reiniciar Jogo</button>
+        <button id="quiz-next-btn" onclick="nextQuizStep()" class="hidden bg-searchone-cyan hover:bg-searchone-cyanHover text-white font-bold text-xs sm:text-sm px-6 py-2.5 rounded-full transition cyan-glow">
+          Próxima Pergunta →
+        </button>
+      </div>
+
+    </div>
+
+    <!-- NAVIGATION FOOTER -->
+    <div class="pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <a href="fatos-atomicos.html" class="text-xs text-slate-500 hover:text-black font-semibold flex items-center gap-1.5">
+        ← Voltar ao Módulo 04: Fatos Atômicos
+      </a>
+      <a href="diagnostico-marca.html" class="w-full sm:w-auto bg-searchone-cyan hover:bg-searchone-cyanHover text-white font-bold text-xs sm:text-sm px-7 py-3 rounded-full transition cyan-glow text-center">
+        Avançar para o Módulo 06: Diagnóstico de Domínio →
+      </a>
+    </div>
+
+  </main>
+
+  <!-- MODAL: DICA DA ESPECIALISTA (CAROL PERES) -->
+  <div id="hint-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white max-w-md w-full rounded-2xl border-2 border-amber-400 p-6 space-y-4 shadow-2xl relative">
+      <button onclick="closeHintModal()" class="absolute top-4 right-4 text-slate-400 hover:text-black">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-amber-500 to-amber-300 text-white flex items-center justify-center font-black text-base shadow-md">
+          CP
+        </div>
+        <div>
+          <span class="text-[10px] font-mono font-bold text-amber-600 uppercase">DICA DOS UNIVERSITÁRIOS</span>
+          <h4 class="text-base font-black text-black">Carol Peres Analisa o Caso</h4>
+          <span class="text-[11px] text-slate-500">CEO Search One Digital</span>
+        </div>
+      </div>
+
+      <div class="p-4 rounded-xl bg-amber-50 border border-amber-200 text-xs sm:text-sm text-slate-800 leading-relaxed font-medium" id="hint-content">
+        <!-- Injetado dinamicamente -->
+      </div>
+
+      <button onclick="closeHintModal()" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-2.5 rounded-full text-xs transition">
+        Entendi a Dica, Voltar ao Jogo!
+      </button>
+    </div>
+  </div>
+
+  <!-- FLOATING QUICK MENU BUTTON (MOBILE COMFORT) -->
+  <div class="fixed bottom-6 left-6 z-40 xl:hidden">
+    <button onclick="toggleMobileMenu()" class="bg-slate-900 text-white font-bold text-xs px-4 py-3 rounded-full shadow-2xl flex items-center gap-2 border border-slate-700">
+      <svg class="w-4 h-4 text-searchone-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <span>Módulos</span>
+    </button>
+  </div>
+
+  <!-- FLOATING WHATSAPP -->
+  <a href="https://api.whatsapp.com/send?phone=5511999999999&text=Ol%C3%A1!%20Estou%20jogando%20a%20Arena%20White%20Hat." target="_blank" class="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-searchone-whatsapp hover:bg-searchone-whatsappHover text-white shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110">
+    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.698.077-1.11-.059-.414-.136-.935-.308-1.597-.732-2.316-1.48-3.83-3.904-3.948-4.062-.118-.157-.954-1.27-.954-2.424 0-1.153.606-1.722.822-1.957.216-.235.472-.294.629-.294.157 0 .314.002.451.009.144.007.337-.054.526.402.196.471.668 1.63.727 1.749.059.118.098.256.02.413-.078.157-.118.255-.235.392-.118.138-.248.308-.354.414-.118.118-.241.246-.104.482.137.235.61 1.006 1.309 1.628.9.799 1.658 1.047 1.894 1.164.236.118.373.098.51-.059.138-.157.589-.687.746-.922.157-.236.314-.196.53-.118.216.079 1.373.648 1.609.766.236.118.393.177.451.275.059.098.059.57-.085.975z"/></svg>
+  </a>
+
+  <!-- SCRIPT -->
+  <script>
+    function toggleMobileMenu() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    }
+
+    // Audio chime effect
+    function playChime() {
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(523.25, ctx.currentTime); // C5
+        osc.frequency.exponentialRampToValueAtTime(783.99, ctx.currentTime + 0.25); // G5
+        gain.gain.setValueAtTime(0.2, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.45);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.45);
+      } catch(e){}
+    }
+
+    const quizScenarios = [
+      {
+        title: "Pergunta 1: O cliente exige aparecer na IA para 50 cidades em 7 dias.",
+        desc: "A equipe sugere criar um modelo automático alterando apenas os nomes das cidades com IA em massa.",
+        hint: "Cuidado com a ilusão de escala! Os algoritmos de busca generativa possuem filtros semânticos anti-spam. Se você replicar a mesma página mudando apenas a cidade, o domínio entra na lista negra de governança da IA por conteúdo de baixo valor.",
+        options: [
+          {
+            text: "A) Gerar 50 artigos com IA trocando os nomes das cidades e postar de imediato.",
+            penalty: -40,
+            feedback: "ERRO CRÍTICO (Penalidade -40 pts): Modelos em massa acionam filtros de conteúdo duplicado e penalizam o domínio na fase de Governança das IAs.",
+            correct: false
+          },
+          {
+            text: "B) Mapear dados reais de atendimento por região e criar páginas com prazos e parâmetros locais auditáveis.",
+            penalty: 15,
+            feedback: "RESPOSTA WHITE HAT (+15 pts): A IA valoriza limites geográficos, prazos médios de entrega e casos reais verificáveis.",
+            correct: true
+          }
+        ]
+      },
+      {
+        title: "Pergunta 2: O redator quer colocar 'Somos a agência 100% garantida líder do Brasil' no resumo.",
+        desc: "O redator argumenta que adjetivos fortes aumentam a convicção do usuário e o clique.",
+        hint: "A IA tem pavor de cometer erros ou alucinar. Adjetivos vazios como 'líder' ou '100% garantido' disparam o fator de risco na fórmula matemática do GEO. Evidência concreta com dados reais sempre vence o adjetivo!",
+        options: [
+          {
+            text: "A) Manter o slogan: frases de impacto geram credibilidade para vendas humanas.",
+            penalty: -30,
+            feedback: "PENALIDADE (-30 pts): Superlativos e promessas exageradas aumentam a pontuação de Risco do conteúdo na fórmula de GEO, fazendo a IA descartá-lo.",
+            correct: false
+          },
+          {
+            text: "B) Substituir por dados quantitativos: escopo, tempo de implantação e amostra de casos.",
+            penalty: 20,
+            feedback: "EXCELENTE (+20 pts): A IA não busca adjetivos; busca evidências mensuráveis (quem, quando, com base em qual amostra).",
+            correct: true
+          }
+        ]
+      },
+      {
+        title: "Pergunta 3: Qual é o formato ideal do bloco de texto para facilitar a extração da IA?",
+        desc: "A equipe de redação está formatando os novos conteúdos do blog oficial.",
+        hint: "Lembre-se da regra de ouro da Search One: parágrafos atômicos de 80 a 150 palavras com a prova contígua à conclusão. A máquina não tem tempo de computação para buscar evidências perdidas no fim da página!",
+        options: [
+          {
+            text: "A) Um parágrafo coeso de 80 a 150 palavras com a evidência ao lado da conclusão.",
+            penalty: 25,
+            feedback: "PERFEITO (+25 pts): O e-book define blocos de 80-150 palavras com evidência contígua como o formato de ouro para compressão e citação por LLMs.",
+            correct: true
+          },
+          {
+            text: "B) Textos longos de 3.000 palavras com conclusões no início e referências amontoadas no fim.",
+            penalty: -15,
+            feedback: "RUÍDO (-15 pts): Separar as evidências das afirmações dificulta a extração e aumenta o custo de varredura.",
+            correct: false
+          }
+        ]
+      },
+      {
+        title: "Pergunta 4: Por que o Digital PR na grande imprensa é vital para o GEO?",
+        desc: "Um diretor pergunta por que não focar 100% dos recursos apenas no site oficial.",
+        hint: "Um site falando bem de si mesmo tem peso 1. A imprensa de alta relevância (G1, Exame, Valor) confirmando esse fato tem peso 10. A IA cruza fontes independentes para evitar alucinações!",
+        options: [
+          {
+            text: "A) Porque a IA cruza dados de múltiplas fontes independentes para validar se os fatos do site oficial são verdadeiros.",
+            penalty: 25,
+            feedback: "ACERTO CRÍTICO (+25 pts): O site oficial dá os fatos primários, mas a grande imprensa oferece a validação de autoridade e E-E-A-T que protege contra alucinações.",
+            correct: true
+          },
+          {
+            text: "B) Apenas para conseguir cliques diretos de leitores de notícias.",
+            penalty: -20,
+            feedback: "VISÃO LIMITADA (-20 pts): O Digital PR no GEO atua como o validador de confiança algorítmica para a IA citar sua marca.",
+            correct: false
+          }
+        ]
+      },
+      {
+        title: "Pergunta 5: Segundo o estudo acadêmico de Princeton (Aggarwal et al.), o que mais aumenta citações?",
+        desc: "A equipe precisa decidir entre entupir palavras-chave ou adicionar dados estatísticos concretos.",
+        hint: "No artigo científico formal da ACM SIGKDD 2024 de Princeton, a inserção de estatísticas e números reais gerou um aumento de até +41% na visibilidade, enquanto keyword stuffing gerou queda de 10%!",
+        options: [
+          {
+            text: "A) Adicionar estatísticas precisas, números de amostras e fontes verificáveis (+41% de ganho).",
+            penalty: 25,
+            feedback: "CIÊNCIA COMPROVADA (+25 pts): O estudo de Princeton confirma que adicionar dados quantitativos é a técnica isolada de maior impacto positivo no GEO.",
+            correct: true
+          },
+          {
+            text: "B) Repetir a palavra-chave central 15 vezes ao longo do texto.",
+            penalty: -25,
+            feedback: "PENALIZAÇÃO (-25 pts): O estudo comprovou que keyword stuffing reduz em 10% a chance de ser citado por LLMs.",
+            correct: false
+          }
+        ]
+      },
+      {
+        title: "Pergunta 6: Como o 'Efeito Equalizador' de Digital PR ajuda marcas novas?",
+        desc: "Uma fintech recente quer competir contra um banco tradicional com 20 anos de SEO.",
+        hint: "As IAs dão mais peso para a relevância e frescor das evidências do que para a idade antiga de um domínio. O estudo comprovou que páginas fora do Top 3 têm salto de até +115% de visibilidade ao citar fontes de imprensa!",
+        options: [
+          {
+            text: "A) Conquistando citações na imprensa de negócios, saltando até +115% em visibilidade na IA mesmo sem histórico longo.",
+            penalty: 25,
+            feedback: "GOLAÇO (+25 pts): Esse é o maior poder do GEO: a IA prioriza quem oferece a evidência mais confiável e atualizada, democratizando a autoridade.",
+            correct: true
+          },
+          {
+            text: "B) Esperando 10 anos até o domínio ganhar autoridade tradicional no Google.",
+            penalty: -20,
+            feedback: "ESTRATÉGIA OBSOLETA (-20 pts): O GEO permite que marcas novas conquistem espaço nas respostas generativas imediatamente.",
+            correct: false
+          }
+        ]
+      }
+    ];
+
+    let quizCurrentIndex = 0;
+    let quizScore = 100;
+    let hintsRemaining = 3;
+
+    function loadQuizScenario(index) {
+      const scenario = quizScenarios[index];
+      document.getElementById('quiz-progress').innerText = `Pergunta ${index + 1} de ${quizScenarios.length}`;
+      document.getElementById('quiz-scenario-title').innerText = scenario.title;
+      document.getElementById('quiz-scenario-desc').innerText = scenario.desc;
+      
+      const optContainer = document.getElementById('quiz-options-container');
+      optContainer.innerHTML = '';
+      
+      const feedbackBox = document.getElementById('quiz-feedback-box');
+      feedbackBox.classList.add('hidden');
+      document.getElementById('quiz-next-btn').classList.add('hidden');
+
+      scenario.options.forEach((opt) => {
+        const btn = document.createElement('button');
+        btn.className = "w-full text-left p-4 rounded-xl bg-white hover:bg-slate-100 border border-slate-300 text-xs sm:text-sm text-slate-800 transition flex items-center justify-between font-medium shadow-sm";
+        btn.innerHTML = `<span>${opt.text}</span>`;
+        btn.onclick = () => handleQuizAnswer(index, opt);
+        optContainer.appendChild(btn);
+      });
+    }
+
+    function handleQuizAnswer(index, option) {
+      playChime();
+      const feedbackBox = document.getElementById('quiz-feedback-box');
+      feedbackBox.classList.remove('hidden');
+
+      quizScore += option.penalty;
+      document.getElementById('game-score').innerText = `${quizScore} pts`;
+
+      if (option.correct) {
+        feedbackBox.className = "p-4 rounded-xl text-xs sm:text-sm space-y-1 bg-emerald-50 border border-emerald-200 text-emerald-900";
+        feedbackBox.innerHTML = `<strong>Resposta Certa:</strong> ${option.feedback}`;
+      } else {
+        feedbackBox.className = "p-4 rounded-xl text-xs sm:text-sm space-y-1 bg-red-50 border border-red-200 text-red-900";
+        feedbackBox.innerHTML = `<strong>Penalidade Algorítmica:</strong> ${option.feedback}`;
+      }
+
+      document.getElementById('quiz-next-btn').classList.remove('hidden');
+      const buttons = document.getElementById('quiz-options-container').querySelectorAll('button');
+      buttons.forEach(b => b.disabled = true);
+    }
+
+    function requestExpertHint() {
+      if (hintsRemaining <= 0) {
+        alert("Você já usou todas as suas 3 dicas da Carol Peres neste jogo!");
+        return;
+      }
+      hintsRemaining--;
+      document.getElementById('hints-badge').innerText = `${hintsRemaining} restantes`;
+      if (hintsRemaining === 0) {
+        document.getElementById('btn-hint').classList.add('opacity-50', 'cursor-not-allowed');
+      }
+
+      playChime();
+      const scenario = quizScenarios[quizCurrentIndex];
+      document.getElementById('hint-content').innerHTML = `<em>"${scenario.hint}"</em>`;
+      document.getElementById('hint-modal').classList.remove('hidden');
+    }
+
+    function closeHintModal() {
+      document.getElementById('hint-modal').classList.add('hidden');
+    }
+
+    function nextQuizStep() {
+      quizCurrentIndex++;
+      if (quizCurrentIndex < quizScenarios.length) {
+        loadQuizScenario(quizCurrentIndex);
+      } else {
+        showFinalQuizResults();
+      }
+    }
+
+    function showFinalQuizResults() {
+      const optContainer = document.getElementById('quiz-options-container');
+      optContainer.innerHTML = '';
+      document.getElementById('quiz-next-btn').classList.add('hidden');
+      document.getElementById('quiz-progress').innerText = "Game Show Finalizado";
+      document.getElementById('quiz-scenario-title').innerText = `Parabéns! Sua Pontuação Final: ${quizScore} pts`;
+      document.getElementById('quiz-scenario-desc').innerText = quizScore >= 160 
+        ? "Performance de Mestre em GEO! Você demonstrou pleno domínio sobre a governança de IA, o efeito equalizador de Princeton e as diretrizes White Hat da Search One Digital."
+        : "Você completou o circuito! Recomendamos revisar a Base Técnica completa no Módulo 08 para blindar seu domínio contra penalidades algorítmicas.";
+      
+      const feedbackBox = document.getElementById('quiz-feedback-box');
+      feedbackBox.className = "p-5 rounded-2xl bg-slate-900 text-white flex flex-col sm:flex-row justify-between items-center gap-4";
+      feedbackBox.innerHTML = `
+        <span class="text-xs">Pronto para auditar a autoridade real do seu domínio corporativo?</span>
+        <a href="diagnostico-marca.html" class="bg-searchone-cyan hover:bg-searchone-cyanHover text-white font-bold px-5 py-2.5 rounded-full text-xs transition">Ir para Diagnóstico de Domínio →</a>
+      `;
+      feedbackBox.classList.remove('hidden');
+    }
+
+    function resetGame() {
+      quizCurrentIndex = 0;
+      quizScore = 100;
+      hintsRemaining = 3;
+      document.getElementById('hints-badge').innerText = "3 restantes";
+      document.getElementById('btn-hint').classList.remove('opacity-50', 'cursor-not-allowed');
+      document.getElementById('game-score').innerText = "100 pts";
+      loadQuizScenario(0);
+    }
+
+    window.onload = () => { loadQuizScenario(0); };
+  </script>
+</body>
+</html>

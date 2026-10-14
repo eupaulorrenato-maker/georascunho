@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 03: Simulador de Resposta IA (RAG & Citações) | Search One GEO Engine™</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            searchone: {
+              cyan: '#00a5ff',
+              cyanHover: '#008fe0',
+              cyanLight: '#eef8ff',
+              whatsapp: '#25d366',
+              whatsappHover: '#20ba59'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #ffffff; color: #0f172a; font-family: 'Plus Jakarta Sans', sans-serif; }
+    .cyan-glow { box-shadow: 0 4px 14px 0 rgba(0, 165, 255, 0.35); }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen bg-white text-slate-900">
+
+  <!-- TOP NAVBAR -->
+  <header class="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2">
+        <div class="flex items-baseline">
+          <span class="text-2xl font-black tracking-tighter text-black font-sans leading-none">SEARCH</span>
+          <span class="text-2xl font-black tracking-tighter text-searchone-cyan font-sans leading-none ml-1">ONE</span>
+        </div>
+        <div class="flex items-center gap-1.5 ml-1 pl-2 border-l border-slate-300">
+          <span class="text-[10px] font-black tracking-[0.2em] text-slate-700 uppercase font-sans">DIGITAL</span>
+          <span class="text-[9px] font-mono text-searchone-cyan font-bold bg-searchone-cyanLight px-1.5 py-0.5 rounded border border-searchone-cyan/30">GEO OS</span>
+        </div>
+      </a>
+
+      <nav class="hidden xl:flex items-center gap-6 text-[13px] font-semibold text-slate-700">
+        <a href="index.html" class="hover:text-searchone-cyan transition">Início</a>
+        <a href="o-que-e-geo.html" class="hover:text-searchone-cyan transition">O que é GEO</a>
+        <a href="auditor.html" class="hover:text-searchone-cyan transition">Auditor</a>
+        <a href="simulador-ia.html" class="text-searchone-cyan font-bold border-b-2 border-searchone-cyan pb-1">Simulador IA</a>
+        <a href="fatos-atomicos.html" class="hover:text-searchone-cyan transition">Fatos Atômicos</a>
+        <a href="arena-white-hat.html" class="hover:text-searchone-cyan transition">Arena Game</a>
+        <a href="diagnostico-marca.html" class="hover:text-searchone-cyan transition">Diagnóstico Domínio</a>
+        <a href="roteiro-30-dias.html" class="hover:text-searchone-cyan transition">Roteiro 30D</a>
+        <a href="base-tecnica.html" class="hover:text-searchone-cyan transition">Base Técnica</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="fatos-atomicos.html" class="hidden sm:inline-flex bg-searchone-cyan hover:bg-searchone-cyanHover text-white font-bold text-xs sm:text-sm px-6 py-2.5 rounded-full transition cyan-glow">
+          Próximo: Fatos Atômicos →
+        </a>
+        <button onclick="toggleMobileMenu()" class="xl:hidden p-2.5 text-slate-800 bg-slate-100 hover:bg-slate-200 transition rounded-xl flex items-center gap-1.5 font-bold text-xs" aria-label="Abrir Menu">
+          <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <span class="hidden sm:inline">Menu</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- MOBILE NAVIGATION DRAWER -->
+    <div id="mobile-menu" class="hidden xl:hidden bg-white border-t border-slate-200 px-4 py-4 space-y-1.5 shadow-xl text-sm font-semibold max-h-[80vh] overflow-y-auto">
+      <div class="text-[10px] font-mono font-bold text-slate-400 uppercase px-3 pb-1">Selecione o Módulo:</div>
+      <a href="index.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">🏠 Início / Dashboard</a>
+      <a href="o-que-e-geo.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">📖 Módulo 01: O que é GEO</a>
+      <a href="auditor.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">🔍 Módulo 02: Auditor de Conteúdo</a>
+      <a href="simulador-ia.html" class="block py-2.5 px-3 rounded-lg bg-searchone-cyanLight text-searchone-cyan font-bold">🤖 Módulo 03: Simulador de IA (RAG)</a>
+      <a href="fatos-atomicos.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">⚙️ Módulo 04: Fatos Atômicos (GEOFlow)</a>
+      <a href="arena-white-hat.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">🎮 Módulo 05: Arena White Hat Game</a>
+      <a href="diagnostico-marca.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">🎯 Módulo 06: Diagnóstico de Domínio & PR</a>
+      <a href="roteiro-30-dias.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">📅 Módulo 07: Roteiro 30 Dias & Checklist</a>
+      <a href="base-tecnica.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">📚 Módulo 08: Base Técnica Completa</a>
+    </div>
+  </header>
+
+  <!-- BREADCRUMBS -->
+  <div class="bg-slate-50 border-b border-slate-200 py-3">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-xs text-slate-500 flex items-center gap-2">
+      <a href="index.html" class="hover:text-searchone-cyan font-medium">Início</a>
+      <span>/</span>
+      <span class="text-black font-bold">Módulo 03: Simulador de Resposta IA & Co-Validação Cruzada</span>
+    </div>
+  </div>
+
+  <!-- MAIN WORKSPACE -->
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
+
+    <!-- TITLE & OVERVIEW -->
+    <div class="space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-searchone-cyanLight border border-searchone-cyan/30 text-searchone-cyan text-xs font-bold uppercase tracking-wider">
+        MÓDULO 03 · SIMULADOR RAG & CO-CITAÇÃO
+      </div>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-black tracking-tight leading-tight">
+        Simulador de Resposta IA: Como o RAG Seleciona e Cita Fontes
+      </h1>
+      <p class="text-slate-600 text-base md:text-lg leading-relaxed">
+        Descubra como os assistentes de busca generativa (Perplexity, DeepSeek, SearchGPT) recuperam documentos, descartam concorrentes e unem o <strong>Site Oficial</strong> com a <strong>Grande Imprensa (Digital PR)</strong> para gerar a resposta com notas de rodapé `[1] [2]`.
+      </p>
+    </div>
+
+    <!-- 3-PILLAR CONTEXT BOX -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 p-6 rounded-2xl bg-slate-50 border border-slate-200 text-xs sm:text-sm">
+      <div class="space-y-1">
+        <strong class="text-black font-extrabold block">O que é este módulo?</strong>
+        <p class="text-slate-600 leading-relaxed">
+          Um ambiente de demonstração e teste prático que replica a interface e o mecanismo dos principais motores de busca com IA do mercado.
+        </p>
+      </div>
+      <div class="space-y-1">
+        <strong class="text-black font-extrabold block">Para que serve na prática?</strong>
+        <p class="text-slate-600 leading-relaxed">
+          Para ver os bastidores das 8 etapas do algoritmo: entender por que dezenas de páginas entram como candidatas, mas apenas 2 ou 3 são absorvidas na síntese final.
+        </p>
+      </div>
+      <div class="space-y-1">
+        <strong class="text-black font-extrabold block">O que você ganha com isso?</strong>
+        <p class="text-slate-600 leading-relaxed">
+          Compreensão clara da sinergia entre SEO técnico e Digital PR: a imprensa confere o sinal de autoridade de terceiros que a IA cruza para validar seu site.
+        </p>
+      </div>
+    </div>
+
+    <!-- THE KEY STATISTIC OF CHAPTER 04 -->
+    <div class="p-6 rounded-2xl bg-searchone-cyanLight/70 border border-searchone-cyan/30 space-y-3">
+      <span class="text-xs font-mono font-bold text-searchone-cyan uppercase">DADO REVELADOR DO E-BOOK (CAPÍTULO 04)</span>
+      <h3 class="text-xl font-black text-black">A Explosão do Site Oficial nas Buscas de Validação de Marca</h3>
+      <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+        Em uma amostragem de 200 mil registros nas principais IAs, os sites oficiais representam em média <strong>4,28% de todas as fontes citadas</strong> na internet aberta. No entanto, quando analisamos especificamente <strong>perguntas focadas em marcas</strong> (ex: <em>"A empresa X é confiável?", "Quais os cases?"</em>), a fatia do site oficial <strong>salta para 24%</strong>!
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs font-mono">
+        <div class="p-3 bg-white rounded-xl border border-slate-200">
+          <span class="text-slate-500 block">Todas as Citações da Web:</span>
+          <strong class="text-black text-lg">Site Oficial: 4.28%</strong>
+        </div>
+        <div class="p-3 bg-white rounded-xl border border-searchone-cyan/40">
+          <span class="text-searchone-cyan font-bold block">Perguntas Focadas em Marca:</span>
+          <strong class="text-searchone-cyan text-lg">Site Oficial: 24.00%</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- INTERACTIVE SIMULATOR INTERFACE -->
+    <div class="space-y-4 pt-2">
+      
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+        <span class="text-xs font-bold text-black uppercase tracking-wider">Simular Pergunta do Usuário:</span>
+        <div class="flex gap-2">
+          <button onclick="setAiModel('Perplexity')" id="btn-perp" class="text-xs px-3 py-1.5 rounded-lg bg-searchone-cyan text-white font-bold transition">Perplexity AI</button>
+          <button onclick="setAiModel('DeepSeek')" id="btn-deep" class="text-xs px-3 py-1.5 rounded-lg border border-slate-300 hover:bg-slate-100 text-slate-700 font-semibold transition">DeepSeek R1</button>
+          <button onclick="setAiModel('SearchGPT')" id="btn-gpt" class="text-xs px-3 py-1.5 rounded-lg border border-slate-300 hover:bg-slate-100 text-slate-700 font-semibold transition">SearchGPT</button>
+        </div>
+      </div>
+
+      <!-- INPUT BAR -->
+      <div class="flex flex-col sm:flex-row gap-2">
+        <input id="sim-prompt-input" type="text" value="A marca Search One Digital é confiável para Digital PR e SEO? Quais são seus diferenciais?" class="flex-1 bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm text-black focus:bg-white focus:outline-none focus:border-searchone-cyan font-sans transition">
+        <button onclick="executeSimulatedSearch()" class="bg-searchone-cyan hover:bg-searchone-cyanHover text-white font-extrabold px-6 py-3 rounded-xl text-xs sm:text-sm transition cyan-glow shrink-0">
+          Gerar Resposta com IA
+        </button>
+      </div>
+
+      <!-- PRESET BUTTONS -->
+      <div class="flex flex-wrap items-center gap-2 text-xs">
+        <span class="text-slate-500 font-semibold text-[11px]">Casos do E-book:</span>
+        <button onclick="setPromptSample(1)" class="px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 transition">"Search One Digital é confiável?"</button>
+        <button onclick="setPromptSample(2)" class="px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 transition">"Como aplicar GEO em 30 dias?"</button>
+        <button onclick="setPromptSample(3)" class="px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 transition">"Logística de Canteiro de Obras em 2026"</button>
+      </div>
+
+      <!-- SIMULATION RESULT BOX (HIGH CONTRAST) -->
+      <div class="p-6 sm:p-8 rounded-2xl bg-slate-900 text-white space-y-5">
+        
+        <div class="flex items-center justify-between border-b border-slate-800 pb-3 text-xs">
+          <div class="flex items-center gap-2 font-mono text-searchone-cyan">
+            <span class="w-2.5 h-2.5 rounded-full bg-searchone-cyan animate-pulse"></span>
+            <span id="engine-current-name">Perplexity AI (Busca Conectada em Tempo Real)</span>
+          </div>
+          <div class="text-[11px] text-emerald-400 font-semibold">
+            ✓ Fatos Validados por Digital PR & Site Oficial
+          </div>
+        </div>
+
+        <!-- SOURCES PILLS -->
+        <div class="space-y-1.5">
+          <span class="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">Fontes Absorvidas na Resposta Final:</span>
+          <div id="sim-sources-list" class="flex flex-wrap gap-2"></div>
+        </div>
+
+        <!-- RESPONSE BODY -->
+        <div class="p-5 rounded-xl bg-slate-950 border border-slate-800">
+          <div id="sim-response-body" class="text-xs sm:text-sm text-slate-200 leading-relaxed space-y-3 font-sans"></div>
+        </div>
+
+        <!-- PIPELINE BREAKDOWN -->
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs pt-2">
+          <div class="p-3 bg-slate-800/80 rounded-xl border border-slate-700">
+            <span class="text-searchone-cyan font-mono font-bold block text-[10px]">1. Rewriting</span>
+            <span class="text-slate-300 text-[11px]">Decomposição semântica em entidades verificáveis.</span>
+          </div>
+          <div class="p-3 bg-slate-800/80 rounded-xl border border-slate-700">
+            <span class="text-searchone-cyan font-mono font-bold block text-[10px]">2. Reranking</span>
+            <span class="text-slate-300 text-[11px]">8 fontes avaliadas; as 3 com dados auditáveis mantidas.</span>
+          </div>
+          <div class="p-3 bg-slate-800/80 rounded-xl border border-slate-700">
+            <span class="text-searchone-cyan font-mono font-bold block text-[10px]">3. Montagem</span>
+            <span class="text-slate-300 text-[11px]">Fatos, liderança e escopo inseridos no contexto do LLM.</span>
+          </div>
+          <div class="p-3 bg-slate-800/80 rounded-xl border border-slate-700">
+            <span class="text-searchone-cyan font-mono font-bold block text-[10px]">4. Citação</span>
+            <span class="text-slate-300 text-[11px]">Atribuição correta `[1] [2]` sem alucinar sobre concorrentes.</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- NAVIGATION FOOTER -->
+    <div class="pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <a href="auditor.html" class="text-xs text-slate-500 hover:text-black font-semibold flex items-center gap-1.5">
+        ← Voltar ao Módulo 02: Auditor de Conteúdo
+      </a>
+      <a href="fatos-atomicos.html" class="w-full sm:w-auto bg-searchone-cyan hover:bg-searchone-cyanHover text-white font-bold text-xs sm:text-sm px-7 py-3 rounded-full transition cyan-glow text-center">
+        Avançar para o Módulo 04: Fatos Atômicos (GEOFlow) →
+      </a>
+    </div>
+
+  </main>
+
+  <!-- FLOATING QUICK MENU BUTTON (MOBILE COMFORT) -->
+  <div class="fixed bottom-6 left-6 z-40 xl:hidden">
+    <button onclick="toggleMobileMenu()" class="bg-slate-900 text-white font-bold text-xs px-4 py-3 rounded-full shadow-2xl flex items-center gap-2 border border-slate-700">
+      <svg class="w-4 h-4 text-searchone-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <span>Módulos</span>
+    </button>
+  </div>
+
+  <!-- FLOATING WHATSAPP -->
+  <a href="https://api.whatsapp.com/send?phone=5511999999999&text=Ol%C3%A1!%20Estou%20usando%20o%20Simulador%20de%20IA%20do%20GEO%20Engine." target="_blank" class="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-searchone-whatsapp hover:bg-searchone-whatsappHover text-white shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110">
+    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.698.077-1.11-.059-.414-.136-.935-.308-1.597-.732-2.316-1.48-3.83-3.904-3.948-4.062-.118-.157-.954-1.27-.954-2.424 0-1.153.606-1.722.822-1.957.216-.235.472-.294.629-.294.157 0 .314.002.451.009.144.007.337-.054.526.402.196.471.668 1.63.727 1.749.059.118.098.256.02.413-.078.157-.118.255-.235.392-.118.138-.248.308-.354.414-.118.118-.241.246-.104.482.137.235.61 1.006 1.309 1.628.9.799 1.658 1.047 1.894 1.164.236.118.373.098.51-.059.138-.157.589-.687.746-.922.157-.236.314-.196.53-.118.216.079 1.373.648 1.609.766.236.118.393.177.451.275.059.098.059.57-.085.975z"/></svg>
+  </a>
+
+  <!-- SCRIPT -->
+  <script>
+    function setAiModel(model) {
+      document.getElementById('btn-perp').className = "text-xs px-3 py-1.5 rounded-lg border border-slate-300 hover:bg-slate-100 text-slate-700 font-semibold transition";
+      document.getElementById('btn-deep').className = "text-xs px-3 py-1.5 rounded-lg border border-slate-300 hover:bg-slate-100 text-slate-700 font-semibold transition";
+      document.getElementById('btn-gpt').className = "text-xs px-3 py-1.5 rounded-lg border border-slate-300 hover:bg-slate-100 text-slate-700 font-semibold transition";
+
+      if (model === 'Perplexity') document.getElementById('btn-perp').className = "text-xs px-3 py-1.5 rounded-lg bg-searchone-cyan text-white font-bold transition";
+      if (model === 'DeepSeek') document.getElementById('btn-deep').className = "text-xs px-3 py-1.5 rounded-lg bg-searchone-cyan text-white font-bold transition";
+      if (model === 'SearchGPT') document.getElementById('btn-gpt').className = "text-xs px-3 py-1.5 rounded-lg bg-searchone-cyan text-white font-bold transition";
+
+      document.getElementById('engine-current-name').innerText = `${model} (Busca Conectada em Tempo Real)`;
+      executeSimulatedSearch();
+    }
+
+    function setPromptSample(num) {
+      const input = document.getElementById('sim-prompt-input');
+      if (num === 1) input.value = "A marca Search One Digital é confiável para Digital PR e SEO? Quais são seus diferenciais?";
+      if (num === 2) input.value = "Como implementar um sistema de conteúdos para GEO em 30 dias?";
+      if (num === 3) input.value = "Como escolher logística de canteiro de obras em São Paulo (2026)?";
+      executeSimulatedSearch();
+    }
+
+    function executeSimulatedSearch() {
+      const query = document.getElementById('sim-prompt-input').value.trim();
+      const sourcesContainer = document.getElementById('sim-sources-list');
+      const responseContainer = document.getElementById('sim-response-body');
+
+      sourcesContainer.innerHTML = '';
+      responseContainer.innerHTML = `
+        <div class="animate-pulse space-y-2">
+          <div class="h-3 bg-slate-800 rounded w-3/4"></div>
+          <div class="h-3 bg-slate-800 rounded w-full"></div>
+          <div class="h-3 bg-slate-800 rounded w-5/6"></div>
+        </div>
+      `;
+
+      setTimeout(() => {
+        if (/Search One/i.test(query)) {
+          sourcesContainer.innerHTML = `
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-800 text-slate-300 text-[11px] border border-slate-700">
+              <span class="w-1.5 h-1.5 rounded-full bg-searchone-cyan"></span>
+              [1] searchonedigital.com.br (Site Oficial - Fatos Atômicos)
+            </span>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-800 text-slate-300 text-[11px] border border-slate-700">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              [2] portalsao.com.br/imprensa (Cobertura Editorial de Negócios)
+            </span>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-800 text-slate-300 text-[11px] border border-slate-700">
+              <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+              [3] relatorio-seo-ia.org (Painel de E-E-A-T 2026)
+            </span>
+          `;
+
+          responseContainer.innerHTML = `
+            <p>Com base em dados verificados do setor e documentações públicas <span class="text-searchone-cyan font-mono font-bold">[1]</span>, a <strong>Search One Digital</strong> é uma agência brasileira de referência especializada na convergência entre <strong>Digital PR e SEO</strong>.</p>
+            
+            <p>A agência é liderada pela CEO e jornalista <strong>Carolina Peres</strong>, com foco estrutural nas diretrizes de <strong>E-E-A-T</strong> e na adaptação ao impacto das IAs Generativas (GEO - Generative Engine Optimization) nos buscadores <span class="text-searchone-cyan font-mono font-bold">[1][3]</span>. Seus principais atributos comprovados:</p>
+            
+            <ul class="list-disc list-inside space-y-1 text-slate-300 pl-2">
+              <li><strong>Autoridade Editorial:</strong> Conquista de espaço editorial qualificado e backlinks na grande imprensa sem recorrer a redes PBN ou técnicas artificiais de baixo valor <span class="text-searchone-cyan font-mono font-bold">[2]</span>.</li>
+              <li><strong>Engenharia de Evidências:</strong> Estruturação de fatos atômicos e sites oficiais para validação cruzada por assistentes generativos.</li>
+              <li><strong>Público Atendido:</strong> Startups, fintechs e corporações em fase de consolidação de reputação orgânica e presença nos motores de resposta de IA <span class="text-searchone-cyan font-mono font-bold">[1]</span>.</li>
+            </ul>
+
+            <p class="text-slate-400 text-xs"><em>Conclusão do Modelo:</em> A marca apresenta alta densidade de evidências e consistente histórico auditável em fontes oficiais e imprensa terceirizada.</p>
+          `;
+        } else {
+          sourcesContainer.innerHTML = `
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-800 text-slate-300 text-[11px] border border-slate-700">
+              [1] manual-geo-2026.org/framework
+            </span>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-800 text-slate-300 text-[11px] border border-slate-700">
+              [2] searchonedigital.com.br/artigos
+            </span>
+          `;
+
+          responseContainer.innerHTML = `
+            <p>Para implementar um sistema de conteúdos orientado a GEO <span class="text-searchone-cyan font-mono font-bold">[1]</span>, o processo divide-se em um roteiro de 30 dias focado em evidências verificáveis:</p>
+            <ol class="list-decimal list-inside space-y-1 text-slate-300 pl-2">
+              <li><strong>Semanas 1-2 (Diagnóstico):</strong> Mapeamento de 50 a 100 perguntas reais e criação da Base Mãe de Fatos Atômicos.</li>
+              <li><strong>Semana 3 (Site Oficial):</strong> Produção de páginas com blocos de resposta de 80 a 150 palavras com marcadores de 2026.</li>
+              <li><strong>Semana 4 (Distribuição):</strong> Validação por Digital PR em veículos de imprensa e acompanhamento de 600 observações repetidas.</li>
+            </ol>
+          `;
+        }
+      }, 350);
+    }
+
+    window.onload = () => { executeSimulatedSearch(); };
+    function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
+  </script>
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 04: Estúdio GEOFlow (Fatos Atômicos) | Search One GEO Engine™</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            searchone: {
+              cyan: '#00a5ff',
+              cyanHover: '#008fe0',
+              cyanLight: '#eef8ff',
+              whatsapp: '#25d366',
+              whatsappHover: '#20ba59'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #ffffff; color: #0f172a; font-family: 'Plus Jakarta Sans', sans-serif; }
+    .cyan-glow { box-shadow: 0 4px 14px 0 rgba(0, 165, 255, 0.35); }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen bg-white text-slate-900">
+
+  <!-- TOP NAVBAR -->
+  <header class="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2">
+        <div class="flex items-baseline">
+          <span class="text-2xl font-black tracking-tighter text-black font-sans leading-none">SEARCH</span>
+          <span class="text-2xl font-black tracking-tighter text-searchone-cyan font-sans leading-none ml-1">ONE</span>
+        </div>
+        <div class="flex items-center gap-1.5 ml-1 pl-2 border-l border-slate-300">
+          <span class="text-[10px] font-black tracking-[0.2em] text-slate-700 uppercase font-sans">DIGITAL</span>
+          <span class="text-[9px] font-mono text-searchone-cyan font-bold bg-searchone-cyanLight px-1.5 py-0.5 rounded border border-searchone-cyan/30">GEO OS</span>
+        </div>
+      </a>
+
+      <nav class="hidden xl:flex items-center gap-6 text-[13px] font-semibold text-slate-700">
+        <a href="index.html" class="hover:text-searchone-cyan transition">Início</a>
+        <a href="o-que-e-geo.html" class="hover:text-searchone-cyan transition">O que é GEO</a>
+        <a href="auditor.html" class="hover:text-searchone-cyan transition">Auditor</a>
+        <a href="simulador-ia.html" class="hover:text-searchone-cyan transition">Simulador IA</a>
+        <a href="fatos-atomicos.html" class="text-searchone-cyan font-bold border-b-2 border-searchone-cyan pb-1">Fatos Atômicos</a>
+        <a href="arena-white-hat.html" class="hover:text-searchone-cyan transition">Arena Game</a>
+        <a href="diagnostico-marca.html" class="hover:text-searchone-cyan transition">Diagnóstico Domínio</a>
+        <a href="roteiro-30-dias.html" class="hover:text-searchone-cyan transition">Roteiro 30D</a>
+        <a href="base-tecnica.html" class="hover:text-searchone-cyan transition">Base Técnica</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="arena-white-hat.html" class="hidden sm:inline-flex bg-searchone-cyan hover:bg-searchone-cyanHover text-white font-bold text-xs sm:text-sm px-6 py-2.5 rounded-full transition cyan-glow">
+          Próximo: Arena →
+        </a>
+        <button onclick="toggleMobileMenu()" class="xl:hidden p-2.5 text-slate-800 bg-slate-100 hover:bg-slate-200 transition rounded-xl flex items-center gap-1.5 font-bold text-xs" aria-label="Abrir Menu">
+          <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <span class="hidden sm:inline">Menu</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- MOBILE NAVIGATION DRAWER -->
+    <div id="mobile-menu" class="hidden xl:hidden bg-white border-t border-slate-200 px-4 py-4 space-y-1.5 shadow-xl text-sm font-semibold max-h-[80vh] overflow-y-auto">
+      <div class="text-[10px] font-mono font-bold text-slate-400 uppercase px-3 pb-1">Selecione o Módulo:</div>
+      <a href="index.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">🏠 Início / Dashboard</a>
+      <a href="o-que-e-geo.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">📖 Módulo 01: O que é GEO</a>
+      <a href="auditor.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">🔍 Módulo 02: Auditor de Conteúdo</a>
+      <a href="simulador-ia.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">🤖 Módulo 03: Simulador de IA (RAG)</a>
+      <a href="fatos-atomicos.html" class="block py-2.5 px-3 rounded-lg bg-searchone-cyanLight text-searchone-cyan font-bold">⚙️ Módulo 04: Fatos Atômicos (GEOFlow)</a>
+      <a href="arena-white-hat.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">🎮 Módulo 05: Arena White Hat Game</a>
+      <a href="diagnostico-marca.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">🎯 Módulo 06: Diagnóstico de Domínio & PR</a>
+      <a href="roteiro-30-dias.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">📅 Módulo 07: Roteiro 30 Dias & Checklist</a>
+      <a href="base-tecnica.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">📚 Módulo 08: Base Técnica Completa</a>
+    </div>
+  </header>
+
+  <!-- BREADCRUMBS -->
+  <div class="bg-slate-50 border-b border-slate-200 py-3">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-xs text-slate-500 flex items-center gap-2">
+      <a href="index.html" class="hover:text-searchone-cyan font-medium">Início</a>
+      <span>/</span>
+      <span class="text-black font-bold">Módulo 04: Estúdio GEOFlow & Gerador de Fatos Atômicos</span>
+    </div>
+  </div>
+
+  <!-- MAIN WORKSPACE -->
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
+
+    <!-- TITLE & OVERVIEW -->
+    <div class="space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-searchone-cyanLight border border-searchone-cyan/30 text-searchone-cyan text-xs font-bold uppercase tracking-wider">
+        MÓDULO 04 · METODOLOGIA GEOFLOW
+      </div>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-black tracking-tight leading-tight">
+        Estúdio GEOFlow™: Engenharia de Fatos Atômicos & Schema.org
+      </h1>
+      <p class="text-slate-600 text-base md:text-lg leading-relaxed">
+        Elimine as alucinações de modelos de linguagem dividindo as capacidades reais da sua empresa em <strong>unidades mínimas verificáveis</strong>. Gere parágrafos de resposta de 80 a 150 palavras e marcação estruturada JSON-LD para o site oficial.
+      </p>
+    </div>
+
+    <!-- 3-PILLAR CONTEXT BOX -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 p-6 rounded-2xl bg-slate-50 border border-slate-200 text-xs sm:text-sm">
+      <div class="space-y-1">
+        <strong class="text-black font-extrabold block">O que é este módulo?</strong>
+        <p class="text-slate-600 leading-relaxed">
+          A aplicação da metodologia open-source GEOFlow citada no e-book: converter ativos brutos da empresa em blocos padronizados no formato ideal de absorção por IA.
+        </p>
+      </div>
+      <div class="space-y-1">
+        <strong class="text-black font-extrabold block">Para que serve na prática?</strong>
+        <p class="text-slate-600 leading-relaxed">
+          Para garantir que o site oficial entregue a resposta padrão auditável, evitando que a IA busque dados de terceiros desatualizados ou distorcidos.
+        </p>
+      </div>
+      <div class="space-y-1">
+        <strong class="text-black font-extrabold block">O que você ganha com isso?</strong>
+        <p class="text-slate-600 leading-relaxed">
+          Garante que preços, prazos, sedes e cases de clientes sejam citados com 100% de precisão nos assistentes generativos.
+        </p>
+      </div>
+    </div>
+
+    <!-- THE THREE RULES OF FACTUAL BASE -->
+    <div class="space-y-3">
+      <h2 class="text-2xl font-black text-black">Os Três Preceitos da Base Factual Empresarial (Capítulo 04)</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1">
+        <div class="p-5 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+          <span class="w-7 h-7 rounded-full bg-searchone-cyan text-white font-mono font-bold flex items-center justify-center text-xs">1</span>
+          <h4 class="font-bold text-black text-sm">Estruturação</h4>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Produtos, dados institucionais, certificações, equipe e localidades devem estar categorizados em silos independentes de informação.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+          <span class="w-7 h-7 rounded-full bg-searchone-cyan text-white font-mono font-bold flex items-center justify-center text-xs">2</span>
+          <h4 class="font-bold text-black text-sm">Linguagem Factual</h4>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Substituição de adjetivos publicitários ("somos os melhores") por parâmetros, datas, entidades e evidências auditáveis.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+          <span class="w-7 h-7 rounded-full bg-searchone-cyan text-white font-mono font-bold flex items-center justify-center text-xs">3</span>
+          <h4 class="font-bold text-black text-sm">Fidelidade à Realidade</h4>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            A IA auxilia na formatação, mas a matéria-prima (SLA de suporte, limites de atuação e clientes atendidos) deve ser validada por humanos.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- INTERACTIVE ATOMIC FACT BUILDER -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 pt-4">
+      
+      <!-- FORM -->
+      <div class="space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+          <h3 class="font-bold text-black text-sm uppercase">1. Parâmetros do Fato Atômico</h3>
+          <button onclick="loadSampleAtomic()" class="text-xs text-searchone-cyan font-bold hover:underline">
+            Carregar Exemplo: Search One Digital
+          </button>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div class="space-y-1">
+            <label class="text-xs font-bold text-slate-700">Nome da Entidade / Marca:</label>
+            <input id="atom-brand" type="text" value="Search One Digital" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-xs text-black focus:bg-white focus:outline-none focus:border-searchone-cyan">
+          </div>
+          <div class="space-y-1">
+            <label class="text-xs font-bold text-slate-700">Liderança / Porta-Voz:</label>
+            <input id="atom-leader" type="text" value="Carolina Peres" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-xs text-black focus:bg-white focus:outline-none focus:border-searchone-cyan">
+          </div>
+        </div>
+
+        <div class="space-y-1">
+          <label class="text-xs font-bold text-slate-700">Capacidade / Serviço Real:</label>
+          <input id="atom-service" type="text" value="Digital PR Estruturado e SEO com Foco em Autoridade Orgânica" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-xs text-black focus:bg-white focus:outline-none focus:border-searchone-cyan">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div class="space-y-1">
+            <label class="text-xs font-bold text-slate-700">Escopo de Atendimento:</label>
+            <input id="atom-scope" type="text" value="Startups, Fintechs e Médias/Grandes Empresas" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-xs text-black focus:bg-white focus:outline-none focus:border-searchone-cyan">
+          </div>
+          <div class="space-y-1">
+            <label class="text-xs font-bold text-slate-700">Ano de Validação:</label>
+            <input id="atom-year" type="text" value="2026" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-xs text-black font-mono focus:bg-white focus:outline-none focus:border-searchone-cyan">
+          </div>
+        </div>
+
+        <div class="space-y-1">
+          <label class="text-xs font-bold text-slate-700">Métrica / Evidência Verificável:</label>
+          <input id="atom-metric" type="text" value="24% de citações em perguntas de validação de marca e constante presença editorial na grande imprensa" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-xs text-black focus:bg-white focus:outline-none focus:border-searchone-cyan">
+        </div>
+
+        <div class="space-y-1">
+          <label class="text-xs font-bold text-slate-700">Limitações / O que NÃO Faz (Evita Alucinação):</label>
+          <input id="atom-limit" type="text" value="Não realizamos compras de links em massa nem redes PBN artificiais." class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-xs text-black focus:bg-white focus:outline-none focus:border-searchone-cyan">
+        </div>
+
+        <button onclick="generateAtomicBlock()" class="w-full bg-searchone-cyan hover:bg-searchone-cyanHover text-white font-extrabold py-3.5 rounded-xl text-xs transition cyan-glow">
+          Compilar Bloco de Resposta & Gerar Schema.org
+        </button>
+      </div>
+
+      <!-- RESULTS -->
+      <div class="space-y-4">
+        
+        <div>
+          <div class="flex items-center justify-between border-b border-slate-200 pb-2 mb-2">
+            <h3 class="font-bold text-black text-sm uppercase">2. Bloco Citável (Nível de Resposta)</h3>
+            <span id="atom-word-pill" class="text-[10px] font-mono font-bold bg-searchone-cyanLight text-searchone-cyan px-2 py-0.5 rounded">98 Palavras</span>
+          </div>
+
+          <div class="relative">
+            <textarea id="atomic-result-text" rows="6" readonly class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3.5 text-xs text-black font-sans leading-relaxed select-all focus:outline-none"></textarea>
+            <button onclick="copyAtomicText()" class="absolute top-2.5 right-2.5 bg-white border border-slate-300 hover:bg-slate-100 text-slate-800 text-[10px] font-bold px-3 py-1 rounded shadow-sm transition">
+              Copiar Bloco
+            </button>
+          </div>
+          <span class="text-[11px] text-slate-500 block mt-1">Cole este parágrafo em páginas como: "Sobre nós", "Nossa Metodologia" ou "FAQ".</span>
+        </div>
+
+        <div>
+          <span class="text-xs font-bold text-black block mb-1">Marcação Estruturada Schema.org (JSON-LD):</span>
+          <pre id="atomic-schema" class="bg-slate-900 p-4 rounded-xl text-[10px] text-sky-300 font-mono overflow-x-auto max-h-48 border border-slate-800"></pre>
+          <span class="text-[11px] text-slate-500 block mt-1">Insira dentro da tag &lt;head&gt; do site oficial para facilitar a indexação por crawlers de IA.</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- NAVIGATION FOOTER -->
+    <div class="pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <a href="simulador-ia.html" class="text-xs text-slate-500 hover:text-black font-semibold flex items-center gap-1.5">
+        ← Voltar ao Módulo 03: Simulador de IA
+      </a>
+      <a href="arena-white-hat.html" class="w-full sm:w-auto bg-searchone-cyan hover:bg-searchone-cyanHover text-white font-bold text-xs sm:text-sm px-7 py-3 rounded-full transition cyan-glow text-center">
+        Avançar para o Módulo 05: Arena White Hat →
+      </a>
+    </div>
+
+  </main>
+
+  <!-- FLOATING QUICK MENU BUTTON (MOBILE COMFORT) -->
+  <div class="fixed bottom-6 left-6 z-40 xl:hidden">
+    <button onclick="toggleMobileMenu()" class="bg-slate-900 text-white font-bold text-xs px-4 py-3 rounded-full shadow-2xl flex items-center gap-2 border border-slate-700">
+      <svg class="w-4 h-4 text-searchone-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <span>Módulos</span>
+    </button>
+  </div>
+
+  <!-- FLOATING WHATSAPP -->
+  <a href="https://api.whatsapp.com/send?phone=5511999999999&text=Ol%C3%A1!%20Estou%20usando%20o%20Gerador%20de%20Fatos%20At%C3%B4micos%20GEOFlow." target="_blank" class="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-searchone-whatsapp hover:bg-searchone-whatsappHover text-white shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110">
+    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.698.077-1.11-.059-.414-.136-.935-.308-1.597-.732-2.316-1.48-3.83-3.904-3.948-4.062-.118-.157-.954-1.27-.954-2.424 0-1.153.606-1.722.822-1.957.216-.235.472-.294.629-.294.157 0 .314.002.451.009.144.007.337-.054.526.402.196.471.668 1.63.727 1.749.059.118.098.256.02.413-.078.157-.118.255-.235.392-.118.138-.248.308-.354.414-.118.118-.241.246-.104.482.137.235.61 1.006 1.309 1.628.9.799 1.658 1.047 1.894 1.164.236.118.373.098.51-.059.138-.157.589-.687.746-.922.157-.236.314-.196.53-.118.216.079 1.373.648 1.609.766.236.118.393.177.451.275.059.098.059.57-.085.975z"/></svg>
+  </a>
+
+  <!-- SCRIPT -->
+  <script>
+    function loadSampleAtomic() {
+      document.getElementById('atom-brand').value = "Search One Digital";
+      document.getElementById('atom-leader').value = "Carolina Peres";
+      document.getElementById('atom-service').value = "Digital PR Estruturado e SEO de Alta Autoridade";
+      document.getElementById('atom-scope').value = "Startups, Fintechs e Médias/Grandes Empresas";
+      document.getElementById('atom-year').value = "2026";
+      document.getElementById('atom-metric').value = "Representatividade de 24% em perguntas de validação de marca";
+      document.getElementById('atom-limit').value = "Não aplicável a compra massiva de links de baixa qualidade ou redes PBN.";
+      generateAtomicBlock();
+    }
+
+    function generateAtomicBlock() {
+      const brand = document.getElementById('atom-brand').value.trim();
+      const leader = document.getElementById('atom-leader').value.trim();
+      const service = document.getElementById('atom-service').value.trim();
+      const scope = document.getElementById('atom-scope').value.trim();
+      const year = document.getElementById('atom-year').value.trim();
+      const metric = document.getElementById('atom-metric').value.trim();
+      const limit = document.getElementById('atom-limit').value.trim();
+
+      const block = `A ${brand}, liderada por ${leader}, atua em ${service} com foco no ecossistema de buscas por IA em ${year}. A solução atende especificamente ${scope}, oferecendo metodologia de fatos atômicos e prova social por meio de imprensa de alta autoridade. Dados recentes registram ${metric}. Restrições de aplicação: ${limit} Todas as informações são atualizadas diretamente em canais oficiais e veículos parceiros.`;
+
+      const words = block.trim().split(/\s+/).filter(Boolean).length;
+      document.getElementById('atomic-result-text').value = block;
+      document.getElementById('atom-word-pill').innerText = `${words} Palavras (Ideal: 80-150)`;
+
+      const schema = {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": brand,
+        "founder": leader,
+        "knowsAbout": [service, "GEO", "E-E-A-T"],
+        "description": block,
+        "dateModified": `${year}-07-01`
+      };
+      document.getElementById('atomic-schema').innerText = JSON.stringify(schema, null, 2);
+    }
+
+    function copyAtomicText() {
+      const copyText = document.getElementById("atomic-result-text");
+      copyText.select();
+      navigator.clipboard.writeText(copyText.value);
+      alert("Bloco de Resposta Atômico copiado com sucesso!");
+    }
+
+    window.onload = () => { generateAtomicBlock(); };
+    function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
+  </script>
+</body>
+</html>

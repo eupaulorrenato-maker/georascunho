@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search One GEO Engine™ | Dashboard Central</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            searchone: {
+              cyan: '#00a5ff',
+              cyanHover: '#008fe0',
+              cyanLight: '#eef8ff',
+              dark: '#0a0e17',
+              textMain: '#0f172a',
+              textMuted: '#475569',
+              border: '#e2e8f0',
+              whatsapp: '#25d366',
+              whatsappHover: '#20ba59'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #ffffff;
+      color: #0f172a;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .cyan-glow {
+      box-shadow: 0 4px 14px 0 rgba(0, 165, 255, 0.35);
+    }
+    .card-hover {
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .card-hover:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 32px -8px rgba(15, 23, 42, 0.08);
+      border-color: #00a5ff;
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen bg-white text-slate-900">
+
+  <!-- ============================================================== -->
+  <!-- 1. TOP NAVBAR (CLEAN WHITE + BLACK TEXT + CYAN BUTTON) -->
+  <!-- ============================================================== -->
+  <header class="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- LOGO -->
+      <a href="index.html" class="flex items-center gap-2">
+        <div class="flex items-baseline">
+          <span class="text-2xl font-black tracking-tighter text-black font-sans leading-none">SEARCH</span>
+          <span class="text-2xl font-black tracking-tighter text-searchone-cyan font-sans leading-none ml-1">ONE</span>
+        </div>
+        <div class="flex items-center gap-1.5 ml-1 pl-2 border-l border-slate-300">
+          <span class="text-[10px] font-black tracking-[0.2em] text-slate-700 uppercase font-sans">DIGITAL</span>
+          <span class="text-[9px] font-mono text-searchone-cyan font-bold bg-searchone-cyanLight px-1.5 py-0.5 rounded border border-searchone-cyan/30">GEO OS</span>
+        </div>
+      </a>
+
+      <!-- NAV MENU WITH DIRECT SUBPAGE LINKS -->
+      <nav class="hidden xl:flex items-center gap-6 text-[13px] font-semibold text-slate-700">
+        <a href="index.html" class="text-searchone-cyan font-bold border-b-2 border-searchone-cyan pb-1">Início</a>
+        <a href="o-que-e-geo.html" class="hover:text-searchone-cyan transition">O que é GEO</a>
+        <a href="auditor.html" class="hover:text-searchone-cyan transition">Auditor</a>
+        <a href="simulador-ia.html" class="hover:text-searchone-cyan transition">Simulador IA</a>
+        <a href="fatos-atomicos.html" class="hover:text-searchone-cyan transition">Fatos Atômicos</a>
+        <a href="arena-white-hat.html" class="hover:text-searchone-cyan transition">Arena Game</a>
+        <a href="diagnostico-marca.html" class="hover:text-searchone-cyan transition">Diagnóstico Domínio</a>
+        <a href="roteiro-30-dias.html" class="hover:text-searchone-cyan transition">Roteiro 30D</a>
+        <a href="base-tecnica.html" class="hover:text-searchone-cyan transition">Base Técnica</a>
+      </nav>
+
+      <!-- CTA BUTTON & MOBILE MENU TOGGLE -->
+      <div class="flex items-center gap-3">
+        <button onclick="openModal()" class="bg-searchone-cyan hover:bg-searchone-cyanHover text-white font-bold text-xs sm:text-sm px-5 sm:px-6 py-2.5 rounded-full transition cyan-glow">
+          Fale Conosco
+        </button>
+        <button onclick="toggleMobileMenu()" class="xl:hidden p-2.5 text-slate-800 bg-slate-100 hover:bg-slate-200 transition rounded-xl flex items-center gap-1.5 font-bold text-xs" aria-label="Abrir Menu">
+          <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <span class="hidden sm:inline">Menu</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- MOBILE NAVIGATION DRAWER -->
+    <div id="mobile-menu" class="hidden xl:hidden bg-white border-t border-slate-200 px-4 py-4 space-y-1.5 shadow-xl text-sm font-semibold max-h-[80vh] overflow-y-auto">
+      <div class="text-[10px] font-mono font-bold text-slate-400 uppercase px-3 pb-1">Selecione o Módulo:</div>
+      <a href="index.html" class="block py-2.5 px-3 rounded-lg bg-searchone-cyanLight text-searchone-cyan font-bold">🏠 Início / Dashboard</a>
+      <a href="o-que-e-geo.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">📖 Módulo 01: O que é GEO</a>
+      <a href="auditor.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">🔍 Módulo 02: Auditor de Conteúdo</a>
+      <a href="simulador-ia.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">🤖 Módulo 03: Simulador de IA (RAG)</a>
+      <a href="fatos-atomicos.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">⚙️ Módulo 04: Fatos Atômicos (GEOFlow)</a>
+      <a href="arena-white-hat.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">🎮 Módulo 05: Arena White Hat Game</a>
+      <a href="diagnostico-marca.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">🎯 Módulo 06: Diagnóstico de Domínio & PR</a>
+      <a href="roteiro-30-dias.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">📅 Módulo 07: Roteiro 30 Dias & Checklist</a>
+      <a href="base-tecnica.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">📚 Módulo 08: Base Técnica Completa</a>
+    </div>
+  </header>
+
+  <!-- ============================================================== -->
+  <!-- 2. HERO SECTION: CLEAN WHITE WITH BOLD BLACK TYPOGRAPHY -->
+  <!-- ============================================================== -->
+  <section class="bg-white py-14 sm:py-16 md:py-20 border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+      
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-searchone-cyanLight border border-searchone-cyan/30 text-searchone-cyan text-xs font-bold tracking-widest uppercase">
+        <span class="w-2 h-2 rounded-full bg-searchone-cyan animate-pulse"></span>
+        SISTEMA OPERACIONAL DE INTELIGÊNCIA EM BUSCAS POR IA
+      </div>
+
+      <h1 class="text-3xl sm:text-5xl md:text-6xl font-black text-black tracking-tight leading-[1.15] max-w-4xl mx-auto">
+        Construa a Autoridade da Sua Marca com o <br class="hidden sm:inline">
+        <span class="text-searchone-cyan">Search One GEO Engine™</span>
+      </h1>
+
+      <p class="text-slate-600 text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed">
+        Bem-vindo à plataforma de desenvolvimento e engenharia em <strong>Generative Engine Optimization (GEO)</strong>. Este sistema foi desenhado para profissionais, agências e líderes empresariais que buscam posicionar marcas, produtos e casos de estudo como evidências confiáveis nos motores generativos (SearchGPT, Perplexity, DeepSeek e Google IA).
+      </p>
+
+      <!-- EXECUTIVE KPI STRIP -->
+      <div class="pt-6 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto text-left">
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="text-searchone-cyan font-mono font-extrabold text-2xl">24.0%</div>
+          <div class="text-xs font-bold text-black mt-1">Validação de Marca</div>
+          <div class="text-[11px] text-slate-500">Citação dominada pelo Site Oficial</div>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="text-black font-mono font-extrabold text-2xl">80-150</div>
+          <div class="text-xs font-bold text-black mt-1">Palavras por Bloco</div>
+          <div class="text-[11px] text-slate-500">Formato de ouro para montagem de IA</div>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="text-searchone-cyan font-mono font-extrabold text-2xl">600 Obs.</div>
+          <div class="text-xs font-bold text-black mt-1">Bateria Probabilística</div>
+          <div class="text-[11px] text-slate-500">30 prompts x 5 testes x 4 motores</div>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="text-black font-mono font-extrabold text-2xl">E-E-A-T</div>
+          <div class="text-xs font-bold text-black mt-1">Liderança Carol Peres</div>
+          <div class="text-[11px] text-slate-500">Jornalismo + Digital PR + SEO</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- 3. ONBOARDING & DIDACTIC ORIENTATION: HOW TO USE THE SYSTEM -->
+  <!-- ============================================================== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    
+    <div class="bg-searchone-cyanLight/40 border border-searchone-cyan/30 rounded-2xl p-6 sm:p-8 space-y-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-searchone-cyan text-white flex items-center justify-center font-bold text-sm shadow-sm">
+          CP
+        </div>
+        <div>
+          <h2 class="text-lg font-black text-black">Orientações de Boas-Vindas & Metodologia Search One Digital</h2>
+          <p class="text-xs text-slate-600">Por Carolina Peres — CEO & Especialista em Diretrizes E-E-A-T e Busca Generativa</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2 text-xs sm:text-sm text-slate-700 leading-relaxed border-t border-searchone-cyan/20">
+        <div>
+          <strong class="text-black block mb-1">1. Por que este sistema existe?</strong>
+          Mais de 60% dos cliques tradicionais estão sendo substituídos por respostas sintéticas com notas de rodapé. Publicar dezenas de artigos de IA genéricos é inútil: o motor só cita o que for provado como evidência auditável.
+        </div>
+        <div>
+          <strong class="text-black block mb-1">2. Como navegar na plataforma?</strong>
+          Cada módulo abaixo possui uma <strong>página dedicada exclusiva</strong> com ferramentas ativas, fundamentação técnica, parâmetros algorítmicos e testes em tempo real. Não é uma página única de rolagem: é uma suíte completa.
+        </div>
+        <div>
+          <strong class="text-black block mb-1">3. Qual é o seu ganho final?</strong>
+          Capacidade de diagnosticar qualquer domínio, reestruturar o site oficial em fatos atômicos, conquistar espaço na grande imprensa (Digital PR) e medir probabilisticamente a taxa de citação da sua marca.
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- 4. SYSTEM MODULES: DEDICATED DESTINATIONS (REAL PAGES) -->
+  <!-- ============================================================== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 space-y-8">
+    
+    <div>
+      <span class="text-xs font-black tracking-widest text-searchone-cyan uppercase">ARQUITETURA DA PLATAFORMA</span>
+      <h2 class="text-2xl sm:text-3xl font-black text-black mt-1">Módulos de Formação & Ferramental Operacional</h2>
+      <p class="text-xs sm:text-sm text-slate-600 mt-1">Selecione o módulo que deseja executar. Cada seção oferece ambiente prático, contextualização e métricas de aplicação.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- CARD 1: O QUE É GEO -->
+      <a href="o-que-e-geo.html" class="block p-6 rounded-2xl bg-white border border-slate-200 card-hover space-y-4">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-mono font-bold text-searchone-cyan bg-searchone-cyanLight px-2 py-0.5 rounded">MÓDULO 01</span>
+          <span class="text-xs text-slate-400 font-mono">Teoria & IA</span>
+        </div>
+        <h3 class="text-lg font-black text-black">O que é GEO & Os 7 Passos da IA</h3>
+        <p class="text-xs text-slate-600 leading-relaxed">
+          Entenda a lógica de funcionamento das buscas generativas, a cadeia de 7 etapas da montagem de respostas e os 6 riscos fatais do Black Hat.
+        </p>
+        <div class="pt-2 text-xs font-bold text-searchone-cyan flex items-center gap-1.5">
+          <span>Acessar Módulo 01</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </div>
+      </a>
+
+      <!-- CARD 2: AUDITOR DE CONTEÚDO -->
+      <a href="auditor.html" class="block p-6 rounded-2xl bg-white border border-slate-200 card-hover space-y-4">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-mono font-bold text-searchone-cyan bg-searchone-cyanLight px-2 py-0.5 rounded">MÓDULO 02</span>
+          <span class="text-xs text-emerald-600 font-bold font-mono">FERRAMENTA LIVE</span>
+        </div>
+        <h3 class="text-lg font-black text-black">Auditor de Conteúdo & Diagnóstico</h3>
+        <p class="text-xs text-slate-600 leading-relaxed">
+          Cole rascunhos ou URLs e calcule instantaneamente a probabilidade de citação com base em temporalidade, blocos de 80-150 palavras e densidade factual.
+        </p>
+        <div class="pt-2 text-xs font-bold text-searchone-cyan flex items-center gap-1.5">
+          <span>Abrir Auditor em Tempo Real</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </div>
+      </a>
+
+      <!-- CARD 3: SIMULADOR IA -->
+      <a href="simulador-ia.html" class="block p-6 rounded-2xl bg-white border border-slate-200 card-hover space-y-4">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-mono font-bold text-searchone-cyan bg-searchone-cyanLight px-2 py-0.5 rounded">MÓDULO 03</span>
+          <span class="text-xs text-slate-400 font-mono">RAG & Citações</span>
+        </div>
+        <h3 class="text-lg font-black text-black">Simulador de Resposta IA (RAG)</h3>
+        <p class="text-xs text-slate-600 leading-relaxed">
+          Veja como o modelo reescreve a pergunta, filtra concorrentes e co-valida o site oficial com a grande imprensa através de notas de rodapé `[1] [2]`.
+        </p>
+        <div class="pt-2 text-xs font-bold text-searchone-cyan flex items-center gap-1.5">
+          <span>Testar Simulador Interativo</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </div>
+      </a>
+
+      <!-- CARD 4: FATOS ATÔMICOS (GEOFLOW) -->
+      <a href="fatos-atomicos.html" class="block p-6 rounded-2xl bg-white border border-slate-200 card-hover space-y-4">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-mono font-bold text-searchone-cyan bg-searchone-cyanLight px-2 py-0.5 rounded">MÓDULO 04</span>
+          <span class="text-xs text-slate-400 font-mono">Schema.org</span>
+        </div>
+        <h3 class="text-lg font-black text-black">Gerador de Fatos Atômicos (GEOFlow)</h3>
+        <p class="text-xs text-slate-600 leading-relaxed">
+          Desmembre os ativos da sua empresa em unidades mínimas e gere blocos citáveis no formato ideal com código JSON-LD pronto para inserção no HTML.
+        </p>
+        <div class="pt-2 text-xs font-bold text-searchone-cyan flex items-center gap-1.5">
+          <span>Gerar Fatos Atômicos</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </div>
+      </a>
+
+      <!-- CARD 5: ARENA WHITE HAT -->
+      <a href="arena-white-hat.html" class="block p-6 rounded-2xl bg-white border border-slate-200 card-hover space-y-4">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-mono font-bold text-searchone-cyan bg-searchone-cyanLight px-2 py-0.5 rounded">MÓDULO 05</span>
+          <span class="text-xs text-amber-600 font-bold font-mono">GAMIFICAÇÃO</span>
+        </div>
+        <h3 class="text-lg font-black text-black">Arena de Decisão White Hat</h3>
+        <p class="text-xs text-slate-600 leading-relaxed">
+          Teste seu raciocínio estratégico contra dilemas reais de clientes e descubra como as IAs penalizam atalhos artificiais e recompensam transparência.
+        </p>
+        <div class="pt-2 text-xs font-bold text-searchone-cyan flex items-center gap-1.5">
+          <span>Iniciar Desafio Prático</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </div>
+      </a>
+
+      <!-- CARD 6: DIAGNÓSTICO DE DOMÍNIO & DIGITAL PR -->
+      <a href="diagnostico-marca.html" class="block p-6 rounded-2xl bg-white border border-slate-200 card-hover space-y-4">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-mono font-bold text-searchone-cyan bg-searchone-cyanLight px-2 py-0.5 rounded">MÓDULO 06</span>
+          <span class="text-xs text-slate-400 font-mono">Digital PR & Risco</span>
+        </div>
+        <h3 class="text-lg font-black text-black">Diagnóstico de Domínio & Co-Citação</h3>
+        <p class="text-xs text-slate-600 leading-relaxed">
+          Calcule a citabilidade da sua marca, o custo de varredura (SSR vs. SPA), a vulnerabilidade a alucinações e o Efeito Equalizador de imprensa de Princeton.
+        </p>
+        <div class="pt-2 text-xs font-bold text-searchone-cyan flex items-center gap-1.5">
+          <span>Auditar Domínio & PR</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </div>
+      </a>
+
+      <!-- CARD 7: ROTEIRO 30 DIAS -->
+      <a href="roteiro-30-dias.html" class="block p-6 rounded-2xl bg-white border border-slate-200 card-hover space-y-4">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-mono font-bold text-searchone-cyan bg-searchone-cyanLight px-2 py-0.5 rounded">MÓDULO 07</span>
+          <span class="text-xs text-slate-400 font-mono">Checklist 8 Passos</span>
+        </div>
+        <h3 class="text-lg font-black text-black">Roteiro 30 Dias & Checklist</h3>
+        <p class="text-xs text-slate-600 leading-relaxed">
+          O plano de ação sequencial para guiar sua equipe passo a passo: diagnóstico inicial, produção de 30 páginas, distribuição na imprensa e métricas de 3 níveis.
+        </p>
+        <div class="pt-2 text-xs font-bold text-searchone-cyan flex items-center gap-1.5">
+          <span>Abrir Cronograma & Checklist</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </div>
+      </a>
+
+      <!-- CARD 8: BASE TÉCNICA -->
+      <a href="base-tecnica.html" class="block p-6 rounded-2xl bg-white border border-slate-200 card-hover space-y-4 md:col-span-2 lg:col-span-2">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-mono font-bold text-searchone-cyan bg-searchone-cyanLight px-2 py-0.5 rounded">MÓDULO 08</span>
+          <span class="text-xs text-searchone-cyan font-bold font-mono">ESTUDO PRINCETON + 5 CAPS</span>
+        </div>
+        <h3 class="text-lg font-black text-black">Base Técnica Completa & Pesquisa Princeton</h3>
+        <p class="text-xs text-slate-600 leading-relaxed">
+          Acesso irrestrito a todo o conteúdo conceitual e metodológico do e-book original, além do paper de Princeton / ACM SIGKDD com testes em 10.000 buscas e ranking de 9 estratégias.
+        </p>
+        <div class="pt-2 text-xs font-bold text-searchone-cyan flex items-center gap-1.5">
+          <span>Consultar Enciclopédia Técnica Completa</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </div>
+      </a>
+
+    </div>
+
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- 5. CONSULTING BANNER (SEARCH ONE DIGITAL LEADERSHIP) -->
+  <!-- ============================================================== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+    <div class="p-8 sm:p-10 rounded-2xl bg-slate-900 text-white flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="space-y-2 max-w-2xl">
+        <span class="text-xs font-mono font-bold text-searchone-cyan uppercase tracking-wider">CONSULTORIA & DIGITAL PR EXECUTIVO</span>
+        <h3 class="text-xl sm:text-2xl font-black">Precisa de apoio na implementação do GEO na sua empresa?</h3>
+        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+          A equipe liderada pela jornalista e CEO <strong>Carolina Peres</strong> conecta conquista de espaço editorial na grande imprensa, SEO avançado e Engenharia de Fatos para posicionar grandes marcas e fintechs nos motores generativos.
+        </p>
+      </div>
+      <button onclick="openModal()" class="shrink-0 bg-searchone-cyan hover:bg-searchone-cyanHover text-white font-bold px-7 py-3.5 rounded-full text-xs sm:text-sm transition cyan-glow">
+        Agendar Diagnóstico Institucional
+      </button>
+    </div>
+  </section>
+
+  <!-- FLOATING QUICK MENU BUTTON (MOBILE COMFORT) -->
+  <div class="fixed bottom-6 left-6 z-40 xl:hidden">
+    <button onclick="toggleMobileMenu()" class="bg-slate-900 text-white font-bold text-xs px-4 py-3 rounded-full shadow-2xl flex items-center gap-2 border border-slate-700">
+      <svg class="w-4 h-4 text-searchone-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <span>Módulos</span>
+    </button>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- 6. FLOATING WHATSAPP BUTTON (EXACT STYLE) -->
+  <!-- ============================================================== -->
+  <a href="https://api.whatsapp.com/send?phone=5511999999999&text=Ol%C3%A1!%20Estou%20no%20Search%20One%20GEO%20Engine%20e%20gostaria%20de%20um%20diagn%C3%B3stico%20de%20GEO." target="_blank" class="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-searchone-whatsapp hover:bg-searchone-whatsappHover text-white shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110" title="Fale com a Search One no WhatsApp">
+    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.698.077-1.11-.059-.414-.136-.935-.308-1.597-.732-2.316-1.48-3.83-3.904-3.948-4.062-.118-.157-.954-1.27-.954-2.424 0-1.153.606-1.722.822-1.957.216-.235.472-.294.629-.294.157 0 .314.002.451.009.144.007.337-.054.526.402.196.471.668 1.63.727 1.749.059.118.098.256.02.413-.078.157-.118.255-.235.392-.118.138-.248.308-.354.414-.118.118-.241.246-.104.482.137.235.61 1.006 1.309 1.628.9.799 1.658 1.047 1.894 1.164.236.118.373.098.51-.059.138-.157.589-.687.746-.922.157-.236.314-.196.53-.118.216.079 1.373.648 1.609.766.236.118.393.177.451.275.059.098.059.57-.085.975z"/></svg>
+  </a>
+
+  <!-- ============================================================== -->
+  <!-- 7. FOOTER (CLEAN WHITE) -->
+  <!-- ============================================================== -->
+  <footer class="bg-white border-t border-slate-200 py-10 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-500">
+      
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-black text-sm">SEARCH ONE DIGITAL</span>
+        <span>·</span>
+        <span>Liderança: Carolina Peres (E-E-A-T & IA)</span>
+      </div>
+
+      <div class="flex items-center gap-6 font-medium">
+        <a href="https://searchonedigital.com.br" target="_blank" class="hover:text-searchone-cyan transition">searchonedigital.com.br</a>
+        <span>·</span>
+        <button onclick="openModal()" class="text-searchone-cyan font-bold hover:underline">Fale Conosco</button>
+      </div>
+
+      <div>
+        © 2026 Search One Digital. Todos os direitos reservados.
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- CONSULTING MODAL -->
+  <div id="contact-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white max-w-md w-full rounded-2xl border border-slate-200 p-6 space-y-4 shadow-2xl relative">
+      <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-black">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+
+      <div>
+        <span class="text-[10px] font-mono font-bold text-searchone-cyan uppercase">SEARCH ONE DIGITAL</span>
+        <h3 class="text-lg font-black text-black">Fale com Nossos Especialistas</h3>
+        <p class="text-xs text-slate-600 mt-1">Descubra como colocar sua marca nas respostas de IA com assessoria de imprensa e SEO.</p>
+      </div>
+
+      <div class="space-y-2 pt-2">
+        <a href="https://api.whatsapp.com/send?phone=5511999999999&text=Ol%C3%A1!%20Vim%20pelo%20Search%20One%20GEO%20Engine." target="_blank" class="w-full bg-searchone-whatsapp hover:bg-searchone-whatsappHover text-white font-bold py-3 rounded-full text-xs transition flex items-center justify-center gap-2">
+          <span>Conversar via WhatsApp</span>
+        </a>
+        <a href="https://searchonedigital.com.br" target="_blank" class="w-full bg-slate-900 hover:bg-black text-white font-bold py-3 rounded-full text-xs transition flex items-center justify-center gap-2">
+          <span>Acessar Site Institucional</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openModal() { document.getElementById('contact-modal').classList.remove('hidden'); }
+    function closeModal() { document.getElementById('contact-modal').classList.add('hidden'); }
+    function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
+  </script>
+</body>
+</html>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 02: Auditor de Conteúdo & Diagnóstico GEO | Search One GEO Engine™</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            searchone: {
+              cyan: '#00a5ff',
+              cyanHover: '#008fe0',
+              cyanLight: '#eef8ff',
+              whatsapp: '#25d366',
+              whatsappHover: '#20ba59'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #ffffff; color: #0f172a; font-family: 'Plus Jakarta Sans', sans-serif; }
+    .cyan-glow { box-shadow: 0 4px 14px 0 rgba(0, 165, 255, 0.35); }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen bg-white text-slate-900">
+
+  <!-- TOP NAVBAR -->
+  <header class="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2">
+        <div class="flex items-baseline">
+          <span class="text-2xl font-black tracking-tighter text-black font-sans leading-none">SEARCH</span>
+          <span class="text-2xl font-black tracking-tighter text-searchone-cyan font-sans leading-none ml-1">ONE</span>
+        </div>
+        <div class="flex items-center gap-1.5 ml-1 pl-2 border-l border-slate-300">
+          <span class="text-[10px] font-black tracking-[0.2em] text-slate-700 uppercase font-sans">DIGITAL</span>
+          <span class="text-[9px] font-mono text-searchone-cyan font-bold bg-searchone-cyanLight px-1.5 py-0.5 rounded border border-searchone-cyan/30">GEO OS</span>
+        </div>
+      </a>
+
+      <nav class="hidden xl:flex items-center gap-6 text-[13px] font-semibold text-slate-700">
+        <a href="index.html" class="hover:text-searchone-cyan transition">Início</a>
+        <a href="o-que-e-geo.html" class="hover:text-searchone-cyan transition">O que é GEO</a>
+        <a href="auditor.html" class="text-searchone-cyan font-bold border-b-2 border-searchone-cyan pb-1">Auditor</a>
+        <a href="simulador-ia.html" class="hover:text-searchone-cyan transition">Simulador IA</a>
+        <a href="fatos-atomicos.html" class="hover:text-searchone-cyan transition">Fatos Atômicos</a>
+        <a href="arena-white-hat.html" class="hover:text-searchone-cyan transition">Arena Game</a>
+        <a href="diagnostico-marca.html" class="hover:text-searchone-cyan transition">Diagnóstico Domínio</a>
+        <a href="roteiro-30-dias.html" class="hover:text-searchone-cyan transition">Roteiro 30D</a>
+        <a href="base-tecnica.html" class="hover:text-searchone-cyan transition">Base Técnica</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="simulador-ia.html" class="hidden sm:inline-flex bg-searchone-cyan hover:bg-searchone-cyanHover text-white font-bold text-xs sm:text-sm px-6 py-2.5 rounded-full transition cyan-glow">
+          Próximo: Simulador →
+        </a>
+        <button onclick="toggleMobileMenu()" class="xl:hidden p-2.5 text-slate-800 bg-slate-100 hover:bg-slate-200 transition rounded-xl flex items-center gap-1.5 font-bold text-xs" aria-label="Abrir Menu">
+          <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <span class="hidden sm:inline">Menu</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- MOBILE NAVIGATION DRAWER -->
+    <div id="mobile-menu" class="hidden xl:hidden bg-white border-t border-slate-200 px-4 py-4 space-y-1.5 shadow-xl text-sm font-semibold max-h-[80vh] overflow-y-auto">
+      <div class="text-[10px] font-mono font-bold text-slate-400 uppercase px-3 pb-1">Selecione o Módulo:</div>
+      <a href="index.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">🏠 Início / Dashboard</a>
+      <a href="o-que-e-geo.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">📖 Módulo 01: O que é GEO</a>
+      <a href="auditor.html" class="block py-2.5 px-3 rounded-lg bg-searchone-cyanLight text-searchone-cyan font-bold">🔍 Módulo 02: Auditor de Conteúdo</a>
+      <a href="simulador-ia.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">🤖 Módulo 03: Simulador de IA (RAG)</a>
+      <a href="fatos-atomicos.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">⚙️ Módulo 04: Fatos Atômicos (GEOFlow)</a>
+      <a href="arena-white-hat.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">🎮 Módulo 05: Arena White Hat Game</a>
+      <a href="diagnostico-marca.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">🎯 Módulo 06: Diagnóstico de Domínio & PR</a>
+      <a href="roteiro-30-dias.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">📅 Módulo 07: Roteiro 30 Dias & Checklist</a>
+      <a href="base-tecnica.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">📚 Módulo 08: Base Técnica Completa</a>
+    </div>
+  </header>
+
+  <!-- BREADCRUMBS -->
+  <div class="bg-slate-50 border-b border-slate-200 py-3">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-xs text-slate-500 flex items-center gap-2">
+      <a href="index.html" class="hover:text-searchone-cyan font-medium">Início</a>
+      <span>/</span>
+      <span class="text-black font-bold">Módulo 02: Auditor de Conteúdo & Diagnóstico de Citabilidade</span>
+    </div>
+  </div>
+
+  <!-- MAIN WORKSPACE -->
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
+
+    <!-- TITLE & OVERVIEW -->
+    <div class="space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-searchone-cyanLight border border-searchone-cyan/30 text-searchone-cyan text-xs font-bold uppercase tracking-wider">
+        MÓDULO 02 · FERRAMENTA OPERACIONAL LIVE
+      </div>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-black tracking-tight leading-tight">
+        Auditor de Conteúdo & Diagnóstico Algorítmico GEO
+      </h1>
+      <p class="text-slate-600 text-base md:text-lg leading-relaxed">
+        Cole rascunhos de artigos, seções de FAQ ou resumos institucionais. O algoritmo avalia se o texto atende aos critérios matemáticos de citação de IA descritos no Capítulo 03 do e-book.
+      </p>
+    </div>
+
+    <!-- 3-PILLAR CONTEXT BOX -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 p-6 rounded-2xl bg-slate-50 border border-slate-200 text-xs sm:text-sm">
+      <div class="space-y-1">
+        <strong class="text-black font-extrabold block">O que é este módulo?</strong>
+        <p class="text-slate-600 leading-relaxed">
+          Uma ferramenta de auditoria preditiva que analisa 5 fatores positivos (relevância, temporalidade, extraibilidade, evidências) e 3 negativos (risco, tempo, ruído).
+        </p>
+      </div>
+      <div class="space-y-1">
+        <strong class="text-black font-extrabold block">Para que serve na prática?</strong>
+        <p class="text-slate-600 leading-relaxed">
+          Para aprovar ou reprovar textos antes da publicação no blog ou site oficial, eliminando promessas falsas que ativam filtros de segurança das IAs.
+        </p>
+      </div>
+      <div class="space-y-1">
+        <strong class="text-black font-extrabold block">O que você ganha com isso?</strong>
+        <p class="text-slate-600 leading-relaxed">
+          Certeza matemática de que suas páginas não serão filtradas na etapa de Reranking, garantindo presença nas respostas sintetizadas dos LLMs.
+        </p>
+      </div>
+    </div>
+
+    <!-- THE MATHEMATICAL FORMULA -->
+    <div class="p-5 rounded-2xl bg-slate-900 text-white space-y-2">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+        <span class="text-xs font-mono font-bold text-searchone-cyan uppercase">FÓRMULA MATEMÁTICA DE CITABILIDADE (CAPÍTULO 03)</span>
+        <span class="text-[11px] text-slate-400">Search One Digital 2026</span>
+      </div>
+      <div class="font-mono text-xs sm:text-sm text-center py-2 text-slate-200">
+        Probabilidade de Citação ∝ <span class="text-searchone-cyan">(Relevância + Temporalidade + Autoridade + Extraibilidade + Adequação)</span> <br class="sm:hidden">
+        / <span class="text-red-400">(Risco + Tempo de Resposta + Custo de Varredura)</span>
+      </div>
+      <p class="text-[11px] text-slate-400 text-center">
+        Quanto mais dados mensuráveis e marcadores temporais (2026) tiver seu texto, e menos promessas vazias ("100% garantido"), maior o score.
+      </p>
+    </div>
+
+    <!-- AUDITOR INTERACTIVE WORKSPACE -->
+    <div class="space-y-6 pt-2">
+      
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-bold text-black uppercase tracking-wider">Amostras Rápidas para Teste:</span>
+        <div class="flex gap-2">
+          <button onclick="loadSampleText('vague')" class="text-xs px-3 py-1.5 rounded-lg border border-slate-300 hover:bg-slate-100 text-slate-700 font-semibold transition">
+            Amostra Vaga (Baixo Score)
+          </button>
+          <button onclick="loadSampleText('optimized')" class="text-xs px-3 py-1.5 rounded-lg bg-searchone-cyanLight text-searchone-cyan font-bold hover:bg-searchone-cyan/20 transition">
+            Amostra GEO Otimizada (Alto Score)
+          </button>
+        </div>
+      </div>
+
+      <!-- TITLE INPUT -->
+      <div class="space-y-1">
+        <label class="block text-xs font-extrabold text-black">
+          Título do Artigo ou Página:
+          <span class="font-normal text-slate-500">(Ideal: 31 a 50 caracteres com marcadores explícitos)</span>
+        </label>
+        <input id="audit-title" type="text" placeholder="Ex: Recomendação de Agências de Digital PR e SEO em 2026: Análise de Autoridade e E-E-A-T" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm text-black focus:bg-white focus:outline-none focus:border-searchone-cyan font-mono transition">
+        <div class="flex justify-between text-[11px] text-slate-500">
+          <span>Inclua termos como: "2026", "Guia", "Comparativo", "Preços".</span>
+          <span id="title-char-count" class="font-mono text-searchone-cyan font-bold">0 caracteres</span>
+        </div>
+      </div>
+
+      <!-- BODY TEXT INPUT -->
+      <div class="space-y-1">
+        <label class="block text-xs font-extrabold text-black">
+          Bloco de Resposta ou Resumo (Cole aqui):
+          <span class="font-normal text-slate-500">(Ideal: 80 a 150 palavras com conclusão contígua à evidência)</span>
+        </label>
+        <textarea id="audit-text" rows="8" placeholder="Cole o parágrafo ou conteúdo que você planeja publicar..." class="w-full bg-slate-50 border border-slate-300 rounded-xl p-4 text-xs sm:text-sm text-black focus:bg-white focus:outline-none focus:border-searchone-cyan font-sans transition leading-relaxed"></textarea>
+        <div class="flex justify-between text-[11px] text-slate-500">
+          <span>Evite adjetivos puramente emocionais; priorize dados, prazos e escopo.</span>
+          <span id="text-word-count" class="font-mono text-searchone-cyan font-bold">0 palavras</span>
+        </div>
+      </div>
+
+      <!-- METADATA CHECKBOXES -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+        <label class="flex items-center gap-2 p-3 rounded-xl border border-slate-200 bg-slate-50 cursor-pointer">
+          <input type="checkbox" id="check-table" class="rounded text-searchone-cyan focus:ring-searchone-cyan">
+          <span class="font-semibold text-slate-800">Possui Tabelas / FAQ</span>
+        </label>
+        <label class="flex items-center gap-2 p-3 rounded-xl border border-slate-200 bg-slate-50 cursor-pointer">
+          <input type="checkbox" id="check-domain" checked class="rounded text-searchone-cyan focus:ring-searchone-cyan">
+          <span class="font-semibold text-slate-800">Site Oficial (SSR)</span>
+        </label>
+        <label class="flex items-center gap-2 p-3 rounded-xl border border-slate-200 bg-slate-50 cursor-pointer">
+          <input type="checkbox" id="check-press" class="rounded text-searchone-cyan focus:ring-searchone-cyan">
+          <span class="font-semibold text-slate-800">Menção na Imprensa</span>
+        </label>
+        <label class="flex items-center gap-2 p-3 rounded-xl border border-slate-200 bg-slate-50 cursor-pointer">
+          <input type="checkbox" id="check-schema" class="rounded text-searchone-cyan focus:ring-searchone-cyan">
+          <span class="font-semibold text-slate-800">Schema.org Marcado</span>
+        </label>
+      </div>
+
+      <!-- RUN BUTTON -->
+      <button onclick="runAudit()" class="w-full bg-searchone-cyan hover:bg-searchone-cyanHover text-white font-extrabold py-4 px-6 rounded-xl text-sm transition cyan-glow flex items-center justify-center gap-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+        <span>Executar Diagnóstico de Citabilidade Algorítmica</span>
+      </button>
+
+      <!-- RESULTS PANEL (HIGH CONTRAST) -->
+      <div class="p-6 sm:p-8 rounded-2xl bg-slate-900 text-white space-y-6">
+        
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-slate-800 pb-5">
+          <div>
+            <span class="text-xs font-mono font-bold text-searchone-cyan uppercase">DIAGNÓSTICO ALGORÍTMICO SEARCH ONE</span>
+            <h3 class="text-lg font-black text-white mt-0.5">Probabilidade Global de Citação pela IA</h3>
+          </div>
+          <div class="flex items-center gap-4">
+            <span id="score-badge" class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-slate-800 text-slate-400">Aguardando Execução</span>
+            <div id="final-score" class="text-5xl font-black font-mono text-slate-400">--%</div>
+          </div>
+        </div>
+
+        <!-- 4 FACTOR BARS -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 text-xs">
+          <div>
+            <div class="flex justify-between text-slate-300 mb-1.5">
+              <span>1. Sinal Temporal (Marcador 2026/Datas):</span>
+              <span id="score-temporal" class="font-mono text-searchone-cyan font-bold">0%</span>
+            </div>
+            <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+              <div id="bar-temporal" class="bg-searchone-cyan h-full w-0 transition-all duration-500"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between text-slate-300 mb-1.5">
+              <span>2. Extraibilidade (Bloco 80-150 palavras):</span>
+              <span id="score-extract" class="font-mono text-searchone-cyan font-bold">0%</span>
+            </div>
+            <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+              <div id="bar-extract" class="bg-searchone-cyan h-full w-0 transition-all duration-500"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between text-slate-300 mb-1.5">
+              <span>3. Densidade de Evidências (Números/Fatos):</span>
+              <span id="score-evidence" class="font-mono text-searchone-cyan font-bold">0%</span>
+            </div>
+            <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+              <div id="bar-evidence" class="bg-searchone-cyan h-full w-0 transition-all duration-500"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between text-slate-300 mb-1.5">
+              <span>4. Controle de Risco (Sem promessas falsas):</span>
+              <span id="score-risk" class="font-mono text-searchone-cyan font-bold">0%</span>
+            </div>
+            <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+              <div id="bar-risk" class="bg-searchone-cyan h-full w-0 transition-all duration-500"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- EDITORIAL RECOMMENDATIONS -->
+        <div id="audit-feedback" class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 space-y-1">
+          <span class="font-bold text-searchone-cyan block">Parecer do Engenheiro de GEO:</span>
+          <span class="text-slate-400 text-[11px] block">Clique em 'Executar Diagnóstico' acima para gerar o parecer técnico detalhado.</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- NAVIGATION FOOTER -->
+    <div class="pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <a href="o-que-e-geo.html" class="text-xs text-slate-500 hover:text-black font-semibold flex items-center gap-1.5">
+        ← Voltar ao Módulo 01: O que é GEO
+      </a>
+      <a href="simulador-ia.html" class="w-full sm:w-auto bg-searchone-cyan hover:bg-searchone-cyanHover text-white font-bold text-xs sm:text-sm px-7 py-3 rounded-full transition cyan-glow text-center">
+        Avançar para o Módulo 03: Simulador de IA →
+      </a>
+    </div>
+
+  </main>
+
+  <!-- FLOATING QUICK MENU BUTTON (MOBILE COMFORT) -->
+  <div class="fixed bottom-6 left-6 z-40 xl:hidden">
+    <button onclick="toggleMobileMenu()" class="bg-slate-900 text-white font-bold text-xs px-4 py-3 rounded-full shadow-2xl flex items-center gap-2 border border-slate-700">
+      <svg class="w-4 h-4 text-searchone-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <span>Módulos</span>
+    </button>
+  </div>
+
+  <!-- FLOATING WHATSAPP -->
+  <a href="https://api.whatsapp.com/send?phone=5511999999999&text=Ol%C3%A1!%20Estou%20usando%20o%20Auditor%20de%20Conte%C3%BAdo%20GEO." target="_blank" class="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-searchone-whatsapp hover:bg-searchone-whatsappHover text-white shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110">
+    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.698.077-1.11-.059-.414-.136-.935-.308-1.597-.732-2.316-1.48-3.83-3.904-3.948-4.062-.118-.157-.954-1.27-.954-2.424 0-1.153.606-1.722.822-1.957.216-.235.472-.294.629-.294.157 0 .314.002.451.009.144.007.337-.054.526.402.196.471.668 1.63.727 1.749.059.118.098.256.02.413-.078.157-.118.255-.235.392-.118.138-.248.308-.354.414-.118.118-.241.246-.104.482.137.235.61 1.006 1.309 1.628.9.799 1.658 1.047 1.894 1.164.236.118.373.098.51-.059.138-.157.589-.687.746-.922.157-.236.314-.196.53-.118.216.079 1.373.648 1.609.766.236.118.393.177.451.275.059.098.059.57-.085.975z"/></svg>
+  </a>
+
+  <!-- SCRIPT -->
+  <script>
+    const titleInput = document.getElementById('audit-title');
+    const textInput = document.getElementById('audit-text');
+
+    titleInput.addEventListener('input', () => {
+      document.getElementById('title-char-count').innerText = `${titleInput.value.length} caracteres`;
+    });
+    textInput.addEventListener('input', () => {
+      const words = textInput.value.trim().split(/\s+/).filter(Boolean).length;
+      document.getElementById('text-word-count').innerText = `${words} palavras`;
+    });
+
+    function loadSampleText(type) {
+      if (type === 'vague') {
+        titleInput.value = "A Melhor Agência de Todas para o Seu Negócio";
+        textInput.value = "Nossa empresa é líder absoluta de mercado e oferece uma solução completa, 100% garantida e incomparável para qualquer tipo de desafio corporativo. Temos o melhor suporte do Brasil com satisfação garantida por milhares de clientes satisfeitos.";
+        document.getElementById('check-table').checked = false;
+        document.getElementById('check-press').checked = false;
+        document.getElementById('check-schema').checked = false;
+      } else {
+        titleInput.value = "Recomendação de Agências de Digital PR e SEO em 2026: Análise de Autoridade e E-E-A-T";
+        textInput.value = "A Search One Digital, liderada pela jornalista e especialista em E-E-A-T Carolina Peres, estrutura projetos de Digital PR e SEO focados na adaptação a buscas por IA. Em amostragens corporativas de 2026, empresas atendidas registram presença em até 24% das pesquisas de validação de marca em assistentes generativos. A metodologia baseia-se em menções editoriais na grande imprensa e estruturação de fatos atômicos no site oficial. Não se aplica a compras automáticas de links de baixa qualidade ou redes PBN.";
+        document.getElementById('check-table').checked = true;
+        document.getElementById('check-press').checked = true;
+        document.getElementById('check-schema').checked = true;
+      }
+      titleInput.dispatchEvent(new Event('input'));
+      textInput.dispatchEvent(new Event('input'));
+      runAudit();
+    }
+
+    function runAudit() {
+      const title = titleInput.value.trim();
+      const text = textInput.value.trim();
+      const words = text.split(/\s+/).filter(Boolean).length;
+
+      let scoreTemporal = 0;
+      let scoreExtract = 0;
+      let scoreEvidence = 0;
+      let scoreRisk = 100;
+
+      if (/2026|julho de 2026|este ano|atualizado/i.test(title + ' ' + text)) scoreTemporal += 60;
+      if (/2026/.test(title)) scoreTemporal += 40;
+      scoreTemporal = Math.min(100, scoreTemporal);
+
+      if (words >= 80 && words <= 160) {
+        scoreExtract = 100;
+      } else if (words >= 50 && words < 80) {
+        scoreExtract = 65;
+      } else if (words > 160 && words <= 280) {
+        scoreExtract = 75;
+      } else {
+        scoreExtract = 30;
+      }
+
+      let evidencePoints = 0;
+      if (/\d+%|\d+\s*(casos|dias|registros|clientes)/i.test(text)) evidencePoints += 45;
+      if (/[A-Z][a-z]+\s[A-Z][a-z]+/i.test(text)) evidencePoints += 25;
+      if (document.getElementById('check-table').checked) evidencePoints += 15;
+      if (document.getElementById('check-press').checked) evidencePoints += 15;
+      scoreEvidence = Math.min(100, evidencePoints);
+
+      if (/100%|l[ií]der absoluto|o melhor do mundo|garantido|convers[aã]o garantida/i.test(text + ' ' + title)) {
+        scoreRisk -= 60;
+      }
+      if (title.length < 20 || title.length > 70) {
+        scoreRisk -= 15;
+      }
+      scoreRisk = Math.max(10, scoreRisk);
+
+      const hasSchema = document.getElementById('check-schema').checked ? 10 : 0;
+      const finalScoreCalc = Math.round((scoreTemporal * 0.25) + (scoreExtract * 0.25) + (scoreEvidence * 0.3) + (scoreRisk * 0.2) + hasSchema);
+      const finalScore = Math.min(98, Math.max(12, finalScoreCalc));
+
+      document.getElementById('score-temporal').innerText = scoreTemporal + '%';
+      document.getElementById('bar-temporal').style.width = scoreTemporal + '%';
+      document.getElementById('score-extract').innerText = scoreExtract + '%';
+      document.getElementById('bar-extract').style.width = scoreExtract + '%';
+      document.getElementById('score-evidence').innerText = scoreEvidence + '%';
+      document.getElementById('bar-evidence').style.width = scoreEvidence + '%';
+      document.getElementById('score-risk').innerText = scoreRisk + '%';
+      document.getElementById('bar-risk').style.width = scoreRisk + '%';
+
+      const finalEl = document.getElementById('final-score');
+      finalEl.innerText = finalScore + '%';
+
+      const badge = document.getElementById('score-badge');
+      const feedback = document.getElementById('audit-feedback');
+
+      if (finalScore >= 80) {
+        finalEl.className = 'text-5xl font-black font-mono text-emerald-400';
+        badge.className = 'px-3 py-1 rounded-full text-xs font-mono font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30';
+        badge.innerText = 'ALTA CITABILIDADE';
+        feedback.innerHTML = `
+          <span class="font-bold text-emerald-400 block">Excelente Densidade de Evidências:</span>
+          <span class="text-slate-300 text-[11px] block">O conteúdo possui marcadores de tempo explícitos, métricas auditáveis, tamanho ideal para montagem de contexto e baixo índice de alucinação. Alta probabilidade de recomendação pelos LLMs.</span>
+        `;
+      } else if (finalScore >= 50) {
+        finalEl.className = 'text-5xl font-black font-mono text-amber-400';
+        badge.className = 'px-3 py-1 rounded-full text-xs font-mono font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30';
+        badge.innerText = 'CITABILIDADE MÉDIA';
+        feedback.innerHTML = `
+          <span class="font-bold text-amber-400 block">Risco de Filtragem no Reranking:</span>
+          <span class="text-slate-300 text-[11px] block">Adicione dados quantitativos, reduza adjetivos superlativos e explicite os limites do serviço para elevar a confiabilidade do modelo.</span>
+        `;
+      } else {
+        finalEl.className = 'text-5xl font-black font-mono text-red-400';
+        badge.className = 'px-3 py-1 rounded-full text-xs font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30';
+        badge.innerText = 'ALTO RISCO DE REJEIÇÃO';
+        feedback.innerHTML = `
+          <span class="font-bold text-red-400 block">Alerta de Penalização Algorítmica:</span>
+          <span class="text-slate-300 text-[11px] block">Texto excessivamente promocional ou sem fatos checáveis. A IA descartará esta página durante o estágio de Reranking para evitar alucinações.</span>
+        `;
+      }
+    }
+
+    window.onload = () => { loadSampleText('optimized'); };
+    function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
+  </script>
+</body>
+</html>

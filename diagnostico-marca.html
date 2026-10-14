@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 08: Diagnóstico de Domínio & Co-Citação | Search One GEO Engine™</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            searchone: {
+              cyan: '#00a5ff',
+              cyanHover: '#008fe0',
+              cyanLight: '#eef8ff',
+              whatsapp: '#25d366',
+              whatsappHover: '#20ba59'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #ffffff; color: #0f172a; font-family: 'Plus Jakarta Sans', sans-serif; }
+    .cyan-glow { box-shadow: 0 4px 14px 0 rgba(0, 165, 255, 0.35); }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen bg-white text-slate-900 pb-16">
+
+  <!-- TOP NAVBAR (ALWAYS STICKY WITH HAMBURGER) -->
+  <header class="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2">
+        <div class="flex items-baseline">
+          <span class="text-2xl font-black tracking-tighter text-black font-sans leading-none">SEARCH</span>
+          <span class="text-2xl font-black tracking-tighter text-searchone-cyan font-sans leading-none ml-1">ONE</span>
+        </div>
+        <div class="flex items-center gap-1.5 ml-1 pl-2 border-l border-slate-300">
+          <span class="text-[10px] font-black tracking-[0.2em] text-slate-700 uppercase font-sans">DIGITAL</span>
+          <span class="text-[9px] font-mono text-searchone-cyan font-bold bg-searchone-cyanLight px-1.5 py-0.5 rounded border border-searchone-cyan/30">GEO OS</span>
+        </div>
+      </a>
+
+      <!-- DESKTOP NAV -->
+      <nav class="hidden xl:flex items-center gap-6 text-[13px] font-semibold text-slate-700">
+        <a href="index.html" class="hover:text-searchone-cyan transition">Início</a>
+        <a href="o-que-e-geo.html" class="hover:text-searchone-cyan transition">O que é GEO</a>
+        <a href="auditor.html" class="hover:text-searchone-cyan transition">Auditor</a>
+        <a href="simulador-ia.html" class="hover:text-searchone-cyan transition">Simulador IA</a>
+        <a href="fatos-atomicos.html" class="hover:text-searchone-cyan transition">Fatos Atômicos</a>
+        <a href="arena-white-hat.html" class="hover:text-searchone-cyan transition">Arena Game</a>
+        <a href="diagnostico-marca.html" class="text-searchone-cyan font-bold border-b-2 border-searchone-cyan pb-1">Diagnóstico Domínio</a>
+        <a href="roteiro-30-dias.html" class="hover:text-searchone-cyan transition">Roteiro 30D</a>
+        <a href="base-tecnica.html" class="hover:text-searchone-cyan transition">Base Técnica</a>
+      </nav>
+
+      <!-- CTA & HAMBURGER -->
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="hidden sm:inline-flex bg-searchone-cyan hover:bg-searchone-cyanHover text-white font-bold text-xs sm:text-sm px-5 py-2.5 rounded-full transition cyan-glow">
+          Fale Conosco
+        </a>
+        <button onclick="toggleMobileMenu()" class="xl:hidden p-2.5 text-slate-800 bg-slate-100 hover:bg-slate-200 transition rounded-xl flex items-center gap-1.5 font-bold text-xs" aria-label="Abrir Menu">
+          <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <span class="hidden sm:inline">Menu</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- MOBILE DROPDOWN DRAWER -->
+    <div id="mobile-menu" class="hidden xl:hidden bg-white border-t border-slate-200 px-4 py-4 space-y-1.5 shadow-xl text-sm font-semibold max-h-[80vh] overflow-y-auto">
+      <div class="text-[10px] font-mono font-bold text-slate-400 uppercase px-3 pb-1">Selecione o Módulo:</div>
+      <a href="index.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">🏠 Início / Dashboard</a>
+      <a href="o-que-e-geo.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">📖 Módulo 01: O que é GEO</a>
+      <a href="auditor.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">🔍 Módulo 02: Auditor de Conteúdo</a>
+      <a href="simulador-ia.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">🤖 Módulo 03: Simulador de IA (RAG)</a>
+      <a href="fatos-atomicos.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">⚙️ Módulo 04: Fatos Atômicos (GEOFlow)</a>
+      <a href="arena-white-hat.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">🎮 Módulo 05: Arena White Hat Game</a>
+      <a href="diagnostico-marca.html" class="block py-2.5 px-3 rounded-lg bg-searchone-cyanLight text-searchone-cyan font-bold">🎯 Módulo 06: Diagnóstico de Domínio & PR</a>
+      <a href="roteiro-30-dias.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">📅 Módulo 07: Roteiro 30 Dias & Checklist</a>
+      <a href="base-tecnica.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">📚 Módulo 08: Base Técnica Completa</a>
+    </div>
+  </header>
+
+  <!-- BREADCRUMBS -->
+  <div class="bg-slate-50 border-b border-slate-200 py-3">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-xs text-slate-500 flex items-center gap-2">
+      <a href="index.html" class="hover:text-searchone-cyan font-medium">Início</a>
+      <span>/</span>
+      <span class="text-black font-bold">Diagnóstico de Domínio, Co-Citação & Digital PR</span>
+    </div>
+  </div>
+
+  <!-- MAIN WORKSPACE -->
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
+
+    <!-- TITLE & OVERVIEW -->
+    <div class="space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-searchone-cyanLight border border-searchone-cyan/30 text-searchone-cyan text-xs font-bold uppercase tracking-wider">
+        NOVA FERRAMENTA DE DIAGNÓSTICO ESTRATÉGICO
+      </div>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-black tracking-tight leading-tight">
+        Auditor de Autoridade de Domínio, Co-Citação & Vulnerabilidade de IA
+      </h1>
+      <p class="text-slate-600 text-base md:text-lg leading-relaxed">
+        Analise a robustez factual da sua empresa frente aos motores generativos. Calcule o <strong>Efeito Equalizador de Digital PR</strong>, o índice de vulnerabilidade a alucinações e descubra quais portais de imprensa a IA precisa consultar para validar seu negócio.
+      </p>
+    </div>
+
+    <!-- 3-PILLAR CONTEXT BOX -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 p-6 rounded-2xl bg-slate-50 border border-slate-200 text-xs sm:text-sm">
+      <div class="space-y-1">
+        <strong class="text-black font-extrabold block">O que é este módulo?</strong>
+        <p class="text-slate-600 leading-relaxed">
+          Um analisador de maturidade digital corporativa que cruza a infraestrutura do seu site com a presença editorial externa da marca.
+        </p>
+      </div>
+      <div class="space-y-1">
+        <strong class="text-black font-extrabold block">Para que serve na prática?</strong>
+        <p class="text-slate-600 leading-relaxed">
+          Para diagnosticar se sua empresa está protegida contra concorrentes em buscas comparativas e estimar o ganho real de autoridade com Digital PR.
+        </p>
+      </div>
+      <div class="space-y-1">
+        <strong class="text-black font-extrabold block">O que você ganha com isso?</strong>
+        <p class="text-slate-600 leading-relaxed">
+          O plano de ação exato de quais veículos de imprensa emplacar e quais falhas técnicas corrigir no site oficial para destravar citações.
+        </p>
+      </div>
+    </div>
+
+    <!-- INTERACTIVE AUDITOR TOOL -->
+    <div class="p-6 sm:p-8 rounded-2xl border border-slate-200 bg-white shadow-sm space-y-6">
+      
+      <div class="border-b border-slate-200 pb-3 flex items-center justify-between">
+        <h3 class="font-bold text-black text-base uppercase">Parâmetros do Domínio Empresarial</h3>
+        <button onclick="loadSampleDomain()" class="text-xs text-searchone-cyan font-bold hover:underline">
+          Carregar Exemplo: Search One Digital
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        
+        <div class="space-y-1">
+          <label class="text-xs font-bold text-slate-800">Nome da Empresa / Marca:</label>
+          <input id="dom-brand" type="text" placeholder="Ex: Search One Digital" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs text-black focus:bg-white focus:outline-none focus:border-searchone-cyan">
+        </div>
+
+        <div class="space-y-1">
+          <label class="text-xs font-bold text-slate-800">URL do Site Oficial:</label>
+          <input id="dom-url" type="text" placeholder="Ex: searchonedigital.com.br" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs text-black font-mono focus:bg-white focus:outline-none focus:border-searchone-cyan">
+        </div>
+
+        <div class="space-y-1">
+          <label class="text-xs font-bold text-slate-800">Setor / Mercado:</label>
+          <select id="dom-segment" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs text-black focus:bg-white focus:outline-none focus:border-searchone-cyan">
+            <option value="b2b">Marketing, SEO, Digital PR & Tecnologia B2B</option>
+            <option value="fintech">Fintech, Meios de Pagamento & Investimentos</option>
+            <option value="saas">Software SaaS & Ferramentas Corporativas</option>
+            <option value="ecommerce">E-commerce, Varejo & D2C</option>
+            <option value="health">Saúde, Clínicas & Bem-estar (YMYL)</option>
+            <option value="legal">Direito, Advocacia & Consultoria Empresarial</option>
+          </select>
+        </div>
+
+        <div class="space-y-1">
+          <label class="text-xs font-bold text-slate-800">Presença Atual na Grande Imprensa:</label>
+          <select id="dom-press" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs text-black focus:bg-white focus:outline-none focus:border-searchone-cyan">
+            <option value="high">Alta (Publicações regulares em veículos Tier 1: Exame, Valor, Forbes)</option>
+            <option value="medium">Média (Matérias pontuais ou portais regionais/especializados)</option>
+            <option value="none">Nenhuma (Apenas blog próprio e redes sociais)</option>
+          </select>
+        </div>
+
+        <div class="space-y-1">
+          <label class="text-xs font-bold text-slate-800">Estrutura Técnica do Site Oficial:</label>
+          <select id="dom-tech" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs text-black focus:bg-white focus:outline-none focus:border-searchone-cyan">
+            <option value="ssr">HTML Estático Limpo / SSR (Rápido, sem scripts bloqueantes)</option>
+            <option value="mixed">WordPress com plugins pesados ou renderização intermediária</option>
+            <option value="spa">SPA (React/Vue/Angular complexo com renderização em JavaScript)</option>
+          </select>
+        </div>
+
+        <div class="space-y-1">
+          <label class="text-xs font-bold text-slate-800">Concorrente Principal no Mercado:</label>
+          <input id="dom-rival" type="text" placeholder="Ex: Agência Concorrente Y" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs text-black focus:bg-white focus:outline-none focus:border-searchone-cyan">
+        </div>
+
+      </div>
+
+      <button onclick="runDomainAudit()" class="w-full bg-searchone-cyan hover:bg-searchone-cyanHover text-white font-extrabold py-4 rounded-xl text-sm transition cyan-glow flex items-center justify-center gap-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        <span>Diagnosticar Autoridade de Domínio & Vulnerabilidade na IA</span>
+      </button>
+
+      <!-- RESULTS PANEL -->
+      <div id="dom-results" class="hidden p-6 sm:p-8 rounded-2xl bg-slate-900 text-white space-y-6">
+        
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-slate-800 pb-5">
+          <div>
+            <span class="text-xs font-mono font-bold text-searchone-cyan uppercase">RESULTADO DO DIAGNÓSTICO CORPORATIVO</span>
+            <h3 class="text-xl font-black text-white mt-0.5" id="res-brand-title">Diagnóstico: Search One Digital</h3>
+          </div>
+          <div class="flex items-center gap-3">
+            <span id="res-risk-badge" class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">RISCO BAIXO</span>
+            <div id="res-penetration" class="text-4xl sm:text-5xl font-black font-mono text-searchone-cyan">84%</div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+          <div class="p-4 bg-slate-950 rounded-xl border border-slate-800 space-y-1">
+            <span class="text-slate-400 block font-mono text-[11px]">Taxa de Penetração Estimada:</span>
+            <strong class="text-white text-base font-bold" id="res-pen-desc">Alta Frequência de Citação</strong>
+            <p class="text-slate-400 text-[11px]">Chance da IA recomendar sua marca em perguntas de decisão.</p>
+          </div>
+
+          <div class="p-4 bg-slate-950 rounded-xl border border-slate-800 space-y-1">
+            <span class="text-slate-400 block font-mono text-[11px]">Custo de Varredura (Crawling):</span>
+            <strong class="text-white text-base font-bold" id="res-crawl-desc">Otimizado (SSR/Limpo)</strong>
+            <p class="text-slate-400 text-[11px]">Facilidade com que os bots da IA extraem seus dados brutos.</p>
+          </div>
+
+          <div class="p-4 bg-slate-950 rounded-xl border border-slate-800 space-y-1">
+            <span class="text-slate-400 block font-mono text-[11px]">Efeito Equalizador de Digital PR:</span>
+            <strong class="text-white text-base font-bold text-searchone-cyan" id="res-pr-desc">+115% de Autoridade</strong>
+            <p class="text-slate-400 text-[11px]">Estudo Princeton: matérias na imprensa compensam posições tradicionais.</p>
+          </div>
+        </div>
+
+        <!-- STRATEGIC ROADMAP FOR THIS DOMAIN -->
+        <div class="p-5 rounded-xl bg-slate-950 border border-slate-800 space-y-3">
+          <h4 class="font-bold text-searchone-cyan text-sm uppercase font-mono">Plano de Ação Personalizado para a Marca:</h4>
+          <div id="res-action-plan" class="text-xs text-slate-300 space-y-2 leading-relaxed">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-800">
+          <span class="text-xs text-slate-400">Deseja executar este plano de Digital PR e SEO com a equipe de Carol Peres?</span>
+          <a href="https://api.whatsapp.com/send?phone=5511999999999&text=Ol%C3%A1!%20Fiz%20o%20Diagn%C3%B3stico%20de%20Dom%C3%ADnio%20GEO%20e%20gostaria%20de%20uma%20proposta." target="_blank" class="w-full sm:w-auto bg-searchone-whatsapp hover:bg-searchone-whatsappHover text-white font-bold text-xs px-6 py-3 rounded-full transition flex items-center justify-center gap-2">
+            <span>Solicitar Implementação via WhatsApp</span>
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- NAVIGATION FOOTER -->
+    <div class="pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <a href="arena-white-hat.html" class="text-xs text-slate-500 hover:text-black font-semibold flex items-center gap-1.5">
+        ← Voltar ao Módulo 05: Arena White Hat
+      </a>
+      <a href="roteiro-30-dias.html" class="w-full sm:w-auto bg-searchone-cyan hover:bg-searchone-cyanHover text-white font-bold text-xs sm:text-sm px-7 py-3 rounded-full transition cyan-glow text-center">
+        Avançar para o Módulo 07: Roteiro 30 Dias →
+      </a>
+    </div>
+
+  </main>
+
+  <!-- FLOATING QUICK MENU BUTTON (MOBILE COMFORT) -->
+  <div class="fixed bottom-6 left-6 z-40 xl:hidden">
+    <button onclick="toggleMobileMenu()" class="bg-slate-900 text-white font-bold text-xs px-4 py-3 rounded-full shadow-2xl flex items-center gap-2 border border-slate-700">
+      <svg class="w-4 h-4 text-searchone-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <span>Módulos</span>
+    </button>
+  </div>
+
+  <!-- FLOATING WHATSAPP BUTTON -->
+  <a href="https://api.whatsapp.com/send?phone=5511999999999&text=Ol%C3%A1!%20Estou%20usando%20o%20Diagn%C3%B3stico%20de%20Dom%C3%ADnio%20GEO." target="_blank" class="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-searchone-whatsapp hover:bg-searchone-whatsappHover text-white shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110">
+    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.698.077-1.11-.059-.414-.136-.935-.308-1.597-.732-2.316-1.48-3.83-3.904-3.948-4.062-.118-.157-.954-1.27-.954-2.424 0-1.153.606-1.722.822-1.957.216-.235.472-.294.629-.294.157 0 .314.002.451.009.144.007.337-.054.526.402.196.471.668 1.63.727 1.749.059.118.098.256.02.413-.078.157-.118.255-.235.392-.118.138-.248.308-.354.414-.118.118-.241.246-.104.482.137.235.61 1.006 1.309 1.628.9.799 1.658 1.047 1.894 1.164.236.118.373.098.51-.059.138-.157.589-.687.746-.922.157-.236.314-.196.53-.118.216.079 1.373.648 1.609.766.236.118.393.177.451.275.059.098.059.57-.085.975z"/></svg>
+  </a>
+
+  <!-- SCRIPT -->
+  <script>
+    function toggleMobileMenu() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    }
+
+    function loadSampleDomain() {
+      document.getElementById('dom-brand').value = "Search One Digital";
+      document.getElementById('dom-url').value = "searchonedigital.com.br";
+      document.getElementById('dom-segment').value = "b2b";
+      document.getElementById('dom-press').value = "high";
+      document.getElementById('dom-tech').value = "ssr";
+      document.getElementById('dom-rival').value = "Agências Tradicionais de Link Building";
+      runDomainAudit();
+    }
+
+    function runDomainAudit() {
+      const brand = document.getElementById('dom-brand').value.trim() || "Sua Marca";
+      const press = document.getElementById('dom-press').value;
+      const tech = document.getElementById('dom-tech').value;
+      const segment = document.getElementById('dom-segment').value;
+      const rival = document.getElementById('dom-rival').value.trim() || "Concorrentes de Mercado";
+
+      let score = 50;
+      let risk = "MÉDIO";
+      let riskColor = "bg-amber-500/20 text-amber-400 border-amber-500/30";
+
+      if (press === 'high') score += 35;
+      else if (press === 'medium') score += 15;
+      else score -= 20;
+
+      if (tech === 'ssr') score += 15;
+      else if (tech === 'spa') score -= 20;
+
+      score = Math.min(96, Math.max(15, score));
+
+      if (score >= 75) {
+        risk = "RISCO BAIXO (Alta Citabilidade)";
+        riskColor = "px-3 py-1 rounded-full text-xs font-mono font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
+      } else if (score >= 45) {
+        risk = "RISCO MODERADO (Vulnerável a Alucinações)";
+        riskColor = "px-3 py-1 rounded-full text-xs font-mono font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30";
+      } else {
+        risk = "ALTO RISCO (Exclusão da Síntese de IA)";
+        riskColor = "px-3 py-1 rounded-full text-xs font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30";
+      }
+
+      document.getElementById('res-brand-title').innerText = `Diagnóstico: ${brand}`;
+      document.getElementById('res-penetration').innerText = `${score}%`;
+      const badge = document.getElementById('res-risk-badge');
+      badge.className = riskColor;
+      badge.innerText = risk;
+
+      let planHtml = `
+        <p>• <strong>Análise de Co-Validação:</strong> Para a pergunta <em>"${brand} é confiável?"</em>, a IA buscará obrigatoriamente validar seus dados em fontes externas. Como seu segmento é <em>${segment.toUpperCase()}</em>, ${press === 'high' ? 'sua cobertura editorial atual protege a marca e garante presença sólida no Top 3 de recomendações.' : 'a falta de menções na grande imprensa faz o algoritmo hesitar e priorizar ' + rival + '.'}</p>
+        <p>• <strong>Custo de Varredura:</strong> ${tech === 'ssr' ? 'Seu site possui excelente extraibilidade e HTML semântico, consumindo poucos tokens de Reranking.' : 'Seu site possui barreiras de JavaScript/SPA que aumentam o custo computacional dos rastreadores de IA, elevando o risco de descarte.'}</p>
+        <p>• <strong>Efeito Equalizador de Digital PR:</strong> Conforme o estudo acadêmico de Princeton (Aggarwal et al.), a conquista de espaço editorial legítimo permite que a ${brand} supere concorrentes mais antigos e estabelecidos mesmo partindo de posições orgânicas inferiores.</p>
+      `;
+
+      document.getElementById('res-action-plan').innerHTML = planHtml;
+      document.getElementById('dom-results').classList.remove('hidden');
+      document.getElementById('dom-results').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    window.onload = () => { loadSampleDomain(); };
+  </script>
+</body>
+</html>

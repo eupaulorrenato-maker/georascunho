@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 06: Roteiro de 30 Dias & Checklist | Search One GEO Engine™</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            searchone: {
+              cyan: '#00a5ff',
+              cyanHover: '#008fe0',
+              cyanLight: '#eef8ff',
+              whatsapp: '#25d366',
+              whatsappHover: '#20ba59'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #ffffff; color: #0f172a; font-family: 'Plus Jakarta Sans', sans-serif; }
+    .cyan-glow { box-shadow: 0 4px 14px 0 rgba(0, 165, 255, 0.35); }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen bg-white text-slate-900">
+
+  <!-- TOP NAVBAR -->
+  <header class="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2">
+        <div class="flex items-baseline">
+          <span class="text-2xl font-black tracking-tighter text-black font-sans leading-none">SEARCH</span>
+          <span class="text-2xl font-black tracking-tighter text-searchone-cyan font-sans leading-none ml-1">ONE</span>
+        </div>
+        <div class="flex items-center gap-1.5 ml-1 pl-2 border-l border-slate-300">
+          <span class="text-[10px] font-black tracking-[0.2em] text-slate-700 uppercase font-sans">DIGITAL</span>
+          <span class="text-[9px] font-mono text-searchone-cyan font-bold bg-searchone-cyanLight px-1.5 py-0.5 rounded border border-searchone-cyan/30">GEO OS</span>
+        </div>
+      </a>
+
+      <nav class="hidden xl:flex items-center gap-6 text-[13px] font-semibold text-slate-700">
+        <a href="index.html" class="hover:text-searchone-cyan transition">Início</a>
+        <a href="o-que-e-geo.html" class="hover:text-searchone-cyan transition">O que é GEO</a>
+        <a href="auditor.html" class="hover:text-searchone-cyan transition">Auditor</a>
+        <a href="simulador-ia.html" class="hover:text-searchone-cyan transition">Simulador IA</a>
+        <a href="fatos-atomicos.html" class="hover:text-searchone-cyan transition">Fatos Atômicos</a>
+        <a href="arena-white-hat.html" class="hover:text-searchone-cyan transition">Arena Game</a>
+        <a href="diagnostico-marca.html" class="hover:text-searchone-cyan transition">Diagnóstico Domínio</a>
+        <a href="roteiro-30-dias.html" class="text-searchone-cyan font-bold border-b-2 border-searchone-cyan pb-1">Roteiro 30D</a>
+        <a href="base-tecnica.html" class="hover:text-searchone-cyan transition">Base Técnica</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="base-tecnica.html" class="hidden sm:inline-flex bg-searchone-cyan hover:bg-searchone-cyanHover text-white font-bold text-xs sm:text-sm px-6 py-2.5 rounded-full transition cyan-glow">
+          Próximo: Base Técnica →
+        </a>
+        <button onclick="toggleMobileMenu()" class="xl:hidden p-2.5 text-slate-800 bg-slate-100 hover:bg-slate-200 transition rounded-xl flex items-center gap-1.5 font-bold text-xs" aria-label="Abrir Menu">
+          <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <span class="hidden sm:inline">Menu</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- MOBILE NAVIGATION DRAWER -->
+    <div id="mobile-menu" class="hidden xl:hidden bg-white border-t border-slate-200 px-4 py-4 space-y-1.5 shadow-xl text-sm font-semibold max-h-[80vh] overflow-y-auto">
+      <div class="text-[10px] font-mono font-bold text-slate-400 uppercase px-3 pb-1">Selecione o Módulo:</div>
+      <a href="index.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">🏠 Início / Dashboard</a>
+      <a href="o-que-e-geo.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">📖 Módulo 01: O que é GEO</a>
+      <a href="auditor.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">🔍 Módulo 02: Auditor de Conteúdo</a>
+      <a href="simulador-ia.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">🤖 Módulo 03: Simulador de IA (RAG)</a>
+      <a href="fatos-atomicos.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">⚙️ Módulo 04: Fatos Atômicos (GEOFlow)</a>
+      <a href="arena-white-hat.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">🎮 Módulo 05: Arena White Hat Game</a>
+      <a href="diagnostico-marca.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">🎯 Módulo 06: Diagnóstico de Domínio & PR</a>
+      <a href="roteiro-30-dias.html" class="block py-2.5 px-3 rounded-lg bg-searchone-cyanLight text-searchone-cyan font-bold">📅 Módulo 07: Roteiro 30 Dias & Checklist</a>
+      <a href="base-tecnica.html" class="block py-2.5 px-3 rounded-lg text-slate-700 hover:bg-slate-100">📚 Módulo 08: Base Técnica Completa</a>
+    </div>
+  </header>
+
+  <!-- BREADCRUMBS -->
+  <div class="bg-slate-50 border-b border-slate-200 py-3">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-xs text-slate-500 flex items-center gap-2">
+      <a href="index.html" class="hover:text-searchone-cyan font-medium">Início</a>
+      <span>/</span>
+      <span class="text-black font-bold">Módulo 06: Roteiro Operacional de 30 Dias & Checklist Técnico</span>
+    </div>
+  </div>
+
+  <!-- MAIN WORKSPACE -->
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
+
+    <!-- TITLE & OVERVIEW -->
+    <div class="space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-searchone-cyanLight border border-searchone-cyan/30 text-searchone-cyan text-xs font-bold uppercase tracking-wider">
+        MÓDULO 06 · EXECUÇÃO PRÁTICA
+      </div>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-black tracking-tight leading-tight">
+        Roteiro Operacional de 30 Dias & Pipeline dos 8 Passos
+      </h1>
+      <p class="text-slate-600 text-base md:text-lg leading-relaxed">
+        Não comece escrevendo artigos aleatórios. O primeiro passo do GEO é o diagnóstico estruturado e a medição de linha de base. Acompanhe a esteira de implantação em 30 dias com o checklist interativo.
+      </p>
+    </div>
+
+    <!-- 3-PILLAR CONTEXT BOX -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 p-6 rounded-2xl bg-slate-50 border border-slate-200 text-xs sm:text-sm">
+      <div class="space-y-1">
+        <strong class="text-black font-extrabold block">O que é este módulo?</strong>
+        <p class="text-slate-600 leading-relaxed">
+          O cronograma de implantação validado pela Search One Digital para clientes corporativos, distribuído em blocos semanais e tarefas acionáveis.
+        </p>
+      </div>
+      <div class="space-y-1">
+        <strong class="text-black font-extrabold block">Para que serve na prática?</strong>
+        <p class="text-slate-600 leading-relaxed">
+          Para liderar times de redação, agências parceiras ou desenvolvedores com prazos, entregáveis e métricas de atribuição sem desvios de rota.
+        </p>
+      </div>
+      <div class="space-y-1">
+        <strong class="text-black font-extrabold block">O que você ganha com isso?</strong>
+        <p class="text-slate-600 leading-relaxed">
+          Previsibilidade de entrega e comprovação de resultados através dos 3 níveis de métricas (Front-End, Efeito Direto e Efeito Indireto).
+        </p>
+      </div>
+    </div>
+
+    <!-- THE 3 LEVELS OF METRICS -->
+    <div class="space-y-4">
+      <h2 class="text-2xl font-black text-black">Como Avaliar Resultados no GEO (As 3 Camadas de Métricas)</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
+        
+        <div class="p-5 rounded-2xl border border-slate-200 bg-slate-50 space-y-2">
+          <span class="text-xs font-mono font-bold text-searchone-cyan uppercase">1. Métricas de Front-End</span>
+          <h4 class="font-bold text-black text-base">Operacionais</h4>
+          <ul class="space-y-1 text-slate-600 text-xs">
+            <li>• Variação da Taxa de Menção da Marca (%)</li>
+            <li>• Frequência no Top 3 de recomendações</li>
+            <li>• Taxa de citação do domínio oficial nas fontes</li>
+          </ul>
+        </div>
+
+        <div class="p-5 rounded-2xl border border-slate-200 bg-slate-50 space-y-2">
+          <span class="text-xs font-mono font-bold text-searchone-cyan uppercase">2. Efeito Direto</span>
+          <h4 class="font-bold text-black text-base">Atribuição de Negócio</h4>
+          <ul class="space-y-1 text-slate-600 text-xs">
+            <li>• Landing pages exclusivas para tráfego de IA</li>
+            <li>• Parâmetros UTM específicos por assistente</li>
+            <li>• Campo no CRM: "Como nos conheceu? (Chatbot/IA)"</li>
+          </ul>
+        </div>
+
+        <div class="p-5 rounded-2xl border border-slate-200 bg-slate-50 space-y-2">
+          <span class="text-xs font-mono font-bold text-searchone-cyan uppercase">3. Efeito Indireto</span>
+          <h4 class="font-bold text-black text-base">Sinergia de Marketing</h4>
+          <ul class="space-y-1 text-slate-600 text-xs">
+            <li>• Aumento de buscas diretas pela marca no Google</li>
+            <li>• Crescimento de tráfego direto no site oficial</li>
+            <li>• Aumento na taxa de conversão do time de vendas</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- INTERACTIVE 30-DAY CHECKLIST -->
+    <div class="space-y-4 pt-2">
+      <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+        <div>
+          <h3 class="text-lg font-black text-black">Cronograma de 30 Dias (Checklist Interativo)</h3>
+          <p class="text-xs text-slate-500">Marque as tarefas conforme a sua equipe for executando:</p>
+        </div>
+        <div class="text-right">
+          <span class="text-xs text-slate-500 block">Progresso Geral:</span>
+          <strong id="roadmap-pct" class="font-mono text-searchone-cyan text-xl font-bold">0%</strong>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- FASE 1 -->
+        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
+          <div>
+            <span class="text-xs font-mono font-bold text-searchone-cyan uppercase">SEMANAS 1 E 2</span>
+            <h4 class="font-bold text-black text-base">Diagnóstico & Base Mãe</h4>
+          </div>
+
+          <div class="space-y-2.5 text-xs">
+            <label class="flex items-start gap-2.5 p-2 rounded-lg bg-white border border-slate-200 cursor-pointer">
+              <input type="checkbox" onchange="updateRoadmapProgress()" class="roadmap-chk mt-0.5 rounded text-searchone-cyan focus:ring-searchone-cyan">
+              <span class="text-slate-700">Mapear 50 a 100 perguntas com suporte, vendas e SAC.</span>
+            </label>
+            <label class="flex items-start gap-2.5 p-2 rounded-lg bg-white border border-slate-200 cursor-pointer">
+              <input type="checkbox" onchange="updateRoadmapProgress()" class="roadmap-chk mt-0.5 rounded text-searchone-cyan focus:ring-searchone-cyan">
+              <span class="text-slate-700">Testar a linha de base nas IAs (registrar presença atual).</span>
+            </label>
+            <label class="flex items-start gap-2.5 p-2 rounded-lg bg-white border border-slate-200 cursor-pointer">
+              <input type="checkbox" onchange="updateRoadmapProgress()" class="roadmap-chk mt-0.5 rounded text-searchone-cyan focus:ring-searchone-cyan">
+              <span class="text-slate-700">Extrair fatos atômicos institucionais e de produto.</span>
+            </label>
+            <label class="flex items-start gap-2.5 p-2 rounded-lg bg-white border border-slate-200 cursor-pointer">
+              <input type="checkbox" onchange="updateRoadmapProgress()" class="roadmap-chk mt-0.5 rounded text-searchone-cyan focus:ring-searchone-cyan">
+              <span class="text-slate-700">Auditar certificados, patentes e casos reais auditáveis.</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- FASE 2 -->
+        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
+          <div>
+            <span class="text-xs font-mono font-bold text-searchone-cyan uppercase">SEMANA 3</span>
+            <h4 class="font-bold text-black text-base">Produção & Site Oficial</h4>
+          </div>
+
+          <div class="space-y-2.5 text-xs">
+            <label class="flex items-start gap-2.5 p-2 rounded-lg bg-white border border-slate-200 cursor-pointer">
+              <input type="checkbox" onchange="updateRoadmapProgress()" class="roadmap-chk mt-0.5 rounded text-searchone-cyan focus:ring-searchone-cyan">
+              <span class="text-slate-700">Produzir 1ª vaga de 10 a 30 páginas de FAQ e guias.</span>
+            </label>
+            <label class="flex items-start gap-2.5 p-2 rounded-lg bg-white border border-slate-200 cursor-pointer">
+              <input type="checkbox" onchange="updateRoadmapProgress()" class="roadmap-chk mt-0.5 rounded text-searchone-cyan focus:ring-searchone-cyan">
+              <span class="text-slate-700">Formatar blocos de 80 a 150 palavras com marcadores 2026.</span>
+            </label>
+            <label class="flex items-start gap-2.5 p-2 rounded-lg bg-white border border-slate-200 cursor-pointer">
+              <input type="checkbox" onchange="updateRoadmapProgress()" class="roadmap-chk mt-0.5 rounded text-searchone-cyan focus:ring-searchone-cyan">
+              <span class="text-slate-700">Garantir HTML estático (SSR) e marcação Schema.org.</span>
+            </label>
+            <label class="flex items-start gap-2.5 p-2 rounded-lg bg-white border border-slate-200 cursor-pointer">
+              <input type="checkbox" onchange="updateRoadmapProgress()" class="roadmap-chk mt-0.5 rounded text-searchone-cyan focus:ring-searchone-cyan">
+              <span class="text-slate-700">Revisão humana obrigatória pré-publicação contra alucinações.</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- FASE 3 -->
+        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
+          <div>
+            <span class="text-xs font-mono font-bold text-searchone-cyan uppercase">SEMANA 4</span>
+            <h4 class="font-bold text-black text-base">Distribuição & Métricas</h4>
+          </div>
+
+          <div class="space-y-2.5 text-xs">
+            <label class="flex items-start gap-2.5 p-2 rounded-lg bg-white border border-slate-200 cursor-pointer">
+              <input type="checkbox" onchange="updateRoadmapProgress()" class="roadmap-chk mt-0.5 rounded text-searchone-cyan focus:ring-searchone-cyan">
+              <span class="text-slate-700">Emplacamento de Digital PR em veículos de alta autoridade.</span>
+            </label>
+            <label class="flex items-start gap-2.5 p-2 rounded-lg bg-white border border-slate-200 cursor-pointer">
+              <input type="checkbox" onchange="updateRoadmapProgress()" class="roadmap-chk mt-0.5 rounded text-searchone-cyan focus:ring-searchone-cyan">
+              <span class="text-slate-700">Executar bateria de 600 observações probabilísticas.</span>
+            </label>
+            <label class="flex items-start gap-2.5 p-2 rounded-lg bg-white border border-slate-200 cursor-pointer">
+              <input type="checkbox" onchange="updateRoadmapProgress()" class="roadmap-chk mt-0.5 rounded text-searchone-cyan focus:ring-searchone-cyan">
+              <span class="text-slate-700">Medir taxa de menção de marca e Top 3 de recomendações.</span>
+            </label>
+            <label class="flex items-start gap-2.5 p-2 rounded-lg bg-white border border-slate-200 cursor-pointer">
+              <input type="checkbox" onchange="updateRoadmapProgress()" class="roadmap-chk mt-0.5 rounded text-searchone-cyan focus:ring-searchone-cyan">
+              <span class="text-slate-700">Ciclo de governança: alimentar dúvidas não respondidas.</span>
+            </label>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- THE 8 TECHNICAL ENGINEERING STEPS (GRID) -->
+    <div class="space-y-4 pt-4">
+      <h2 class="text-2xl font-black text-black">Os 8 Passos Técnicos de Implantação (Capítulo 04)</h2>
+      
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+          <span class="font-mono text-searchone-cyan font-bold block mb-1">Passo 1</span>
+          <strong class="text-black block text-sm">Criar o Projeto</strong>
+          <span class="text-slate-500">Definir marca, produto e mercado-alvo.</span>
+        </div>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+          <span class="font-mono text-searchone-cyan font-bold block mb-1">Passo 2</span>
+          <strong class="text-black block text-sm">Importar Dados</strong>
+          <span class="text-slate-500">Manuais, certificações, cases e políticas.</span>
+        </div>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+          <span class="font-mono text-searchone-cyan font-bold block mb-1">Passo 3</span>
+          <strong class="text-black block text-sm">Gerar Base Mãe</strong>
+          <span class="text-slate-500">Bases independentes por linha de produto.</span>
+        </div>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+          <span class="font-mono text-searchone-cyan font-bold block mb-1">Passo 4</span>
+          <strong class="text-black block text-sm">Extrair Fatos</strong>
+          <span class="text-slate-500">Unidades atômicas auditáveis (GEOFlow).</span>
+        </div>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+          <span class="font-mono text-searchone-cyan font-bold block mb-1">Passo 5</span>
+          <strong class="text-black block text-sm">Mapear Dúvidas</strong>
+          <span class="text-slate-500">40 perguntas essenciais para início.</span>
+        </div>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+          <span class="font-mono text-searchone-cyan font-bold block mb-1">Passo 6</span>
+          <strong class="text-black block text-sm">Distribuir Páginas</strong>
+          <span class="text-slate-500">Produtos, cases, comparativos e FAQ.</span>
+        </div>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+          <span class="font-mono text-searchone-cyan font-bold block mb-1">Passo 7</span>
+          <strong class="text-black block text-sm">Publicar com Trava</strong>
+          <span class="text-slate-500">Checagem de conformidade pré-ar.</span>
+        </div>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+          <span class="font-mono text-searchone-cyan font-bold block mb-1">Passo 8</span>
+          <strong class="text-black block text-sm">Medir e Iterar</strong>
+          <span class="text-slate-500">Citações, presença de marca e CRM.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- NAVIGATION FOOTER -->
+    <div class="pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <a href="diagnostico-marca.html" class="text-xs text-slate-500 hover:text-black font-semibold flex items-center gap-1.5">
+        ← Voltar ao Módulo 06: Diagnóstico de Domínio
+      </a>
+      <a href="base-tecnica.html" class="w-full sm:w-auto bg-searchone-cyan hover:bg-searchone-cyanHover text-white font-bold text-xs sm:text-sm px-7 py-3 rounded-full transition cyan-glow text-center">
+        Avançar para o Módulo 08: Base Técnica Completa →
+      </a>
+    </div>
+
+  </main>
+
+  <!-- FLOATING QUICK MENU BUTTON (MOBILE COMFORT) -->
+  <div class="fixed bottom-6 left-6 z-40 xl:hidden">
+    <button onclick="toggleMobileMenu()" class="bg-slate-900 text-white font-bold text-xs px-4 py-3 rounded-full shadow-2xl flex items-center gap-2 border border-slate-700">
+      <svg class="w-4 h-4 text-searchone-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <span>Módulos</span>
+    </button>
+  </div>
+
+  <!-- FLOATING WHATSAPP -->
+  <a href="https://api.whatsapp.com/send?phone=5511999999999&text=Ol%C3%A1!%20Estou%20executando%20o%20Roteiro%20de%2030%20Dias%20de%20GEO." target="_blank" class="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-searchone-whatsapp hover:bg-searchone-whatsappHover text-white shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110">
+    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.698.077-1.11-.059-.414-.136-.935-.308-1.597-.732-2.316-1.48-3.83-3.904-3.948-4.062-.118-.157-.954-1.27-.954-2.424 0-1.153.606-1.722.822-1.957.216-.235.472-.294.629-.294.157 0 .314.002.451.009.144.007.337-.054.526.402.196.471.668 1.63.727 1.749.059.118.098.256.02.413-.078.157-.118.255-.235.392-.118.138-.248.308-.354.414-.118.118-.241.246-.104.482.137.235.61 1.006 1.309 1.628.9.799 1.658 1.047 1.894 1.164.236.118.373.098.51-.059.138-.157.589-.687.746-.922.157-.236.314-.196.53-.118.216.079 1.373.648 1.609.766.236.118.393.177.451.275.059.098.059.57-.085.975z"/></svg>
+  </a>
+
+  <!-- SCRIPT -->
+  <script>
+    function updateRoadmapProgress() {
+      const chks = document.querySelectorAll('.roadmap-chk');
+      let checked = 0;
+      chks.forEach(c => { if (c.checked) checked++; });
+      const pct = Math.round((checked / chks.length) * 100);
+      document.getElementById('roadmap-pct').innerText = `${pct}%`;
+    }
+    function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
+  </script>
+</body>
+</html>
